@@ -28,19 +28,25 @@ return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Color schemes
-  use 'folke/tokyonight.nvim'
-  use 'wojciechkepka/vim-github-dark'
+  use({
+    'projekt0n/github-nvim-theme',
+    config = function()
+      require('github-theme').setup({
+      theme_style = "dark" 
+    })
+    end
+  }) 
 
   use 'christoomey/vim-tmux-navigator' -- tmux & split window navigation
 
   use 'szw/vim-maximizer' -- maximizes and restores current window
 
   -- essential plugins
-  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-  use("vim-scripts/ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
+  use "tpope/vim-surround"  -- add, delete, change surroundings (it's awesome)
+  use "vim-scripts/ReplaceWithRegister" -- replace with register contents using motion (gr + motion)
 
   -- commenting with gc
-  use("numToStr/Comment.nvim")
+  use "numToStr/Comment.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   if packer_bootstrap then
