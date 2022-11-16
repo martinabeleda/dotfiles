@@ -10,3 +10,8 @@ require("martinabeleda.plugins.nvim-cmp")
 require("martinabeleda.plugins.lsp.mason")
 require("martinabeleda.plugins.lsp.lspconfig")
 require("martinabeleda.plugins.lsp.lspsaga")
+require("martinabeleda.plugins.lsp.null-ls")
+require("martinabeleda.plugins.autopairs")
+require("martinabeleda.plugins.treesitter")
+require("martinabeleda.plugins.gitsigns")
+
