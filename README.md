@@ -49,6 +49,8 @@ chsh -s /usr/local/bin/zsh
 
 ## :wrench: nvim
 
+Most of my neovim setup has been sourced from [josean](https://www.youtube.com/watch?v=vdn_pKJUda8)
+
 ```shell
 ln -s ~/Development/martinabeleda/dotfiles/nvim ~/.config/nvim
 ```
