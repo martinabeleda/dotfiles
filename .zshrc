@@ -9,6 +9,9 @@ eval "$(pyenv virtualenv-init -)"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
 
+# Add fig to path
+export PATH=~/.fig/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
