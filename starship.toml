@@ -1,0 +1,8 @@
+[docker_context]
+disabled = true
+
+[aws]
+disabled = true
+
+[package]
+symbol = ""
