@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "hashicorp/tap": {
-        "revision": "5515fdf72334a0438a9397eaea58bf1faf38ac22"
+        "revision": "614bc4ebe539f77ca108c55e36649025e7ff5898"
       },
       "homebrew/bundle": {
         "revision": "5216bbdd9d47b1cb01c0d2cb656de32540ada95d"
       },
       "homebrew/core": {
-        "revision": "8be180f6eeaebc86f59fc6a1b2f8d1cf295d2a83"
+        "revision": "56066db83283d8b002719f6249987301e4be7023"
       },
       "homebrew/services": {
         "revision": "88788e6314506b662f971f43af119c641190a4c8"
@@ -688,6 +688,11 @@
               "url": "https://ghcr.io/v2/homebrew/core/neovim/blobs/sha256:3c2e4769053b9ed9201752b4f875a687d3d483262020d22c6acb0b429fb4e1a7",
               "sha256": "3c2e4769053b9ed9201752b4f875a687d3d483262020d22c6acb0b429fb4e1a7"
             },
+            "ventura": {
+              "cellar": "/usr/local/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/neovim/blobs/sha256:d8761d0a7f3a0ee85022bf5bfdc1b02cb9c9129548d3e9d6e54de785b1b37148",
+              "sha256": "d8761d0a7f3a0ee85022bf5bfdc1b02cb9c9129548d3e9d6e54de785b1b37148"
+            },
             "monterey": {
               "cellar": "/usr/local/Cellar",
               "url": "https://ghcr.io/v2/homebrew/core/neovim/blobs/sha256:82cec22a2ed30ef8297bc27516a74b006dde3eab1076618d5489beba9a78bd53",
@@ -1118,7 +1123,7 @@
         }
       },
       "hashicorp/tap/terraform": {
-        "version": "1.3.4",
+        "version": "1.3.5",
         "bottle": false
       },
       "zsh": {
@@ -1226,10 +1231,10 @@
       "ventura": {
         "HOMEBREW_VERSION": "3.6.11",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "8be180f6eeaebc86f59fc6a1b2f8d1cf295d2a83",
+        "Homebrew/homebrew-core": "56066db83283d8b002719f6249987301e4be7023",
         "CLT": "14.1.0.0.1.1666437224",
         "Xcode": "14.1",
-        "macOS": "13.0"
+        "macOS": "13.0.1"
       }
     }
   }
