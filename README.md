@@ -62,3 +62,17 @@ See the [starship docs](https://starship.rs/guide/#%F0%9F%9A%80-installation) fo
 ```shell
 ln -s ~/Development/martinabeleda/dotfiles/starship.toml ~/.config/starship.toml
 ```
+
+## :package: tmux
+
+Install the tmux plugin manager:
+
+```shell
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Symlink tmux config to `~/.config`
+
+```shell
+ln -s ~/Development/martinabeleda/dotfiles/.tmux.conf ~/.tmux.conf
+```
