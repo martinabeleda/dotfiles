@@ -40,10 +40,15 @@ fi
 alias v="nvim"
 alias vim="nvim"
 
-alias cstrava="cd ~/Development/martinabeleda/strava/"
+# Aliases for project folders
+alias cstrava="cd ~/Development/martinabeleda/strava/ && poetry shell"
+alias cleet="cd ~/Development/martinabeleda/leetcode/ && poetry shell"
 alias cathena="cd ~/Development/martinabeleda/athena/"
 alias caoc="cd ~/Development/martinabeleda/advent-of-code/"
 alias cdot="cd ~/Development/martinabeleda/dotfiles/"
+
+# Alias to reload zshrc
+alias szsh="source ~/.zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
