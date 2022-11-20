@@ -14,4 +14,3 @@ require("martinabeleda.plugins.lsp.null-ls")
 require("martinabeleda.plugins.autopairs")
 require("martinabeleda.plugins.treesitter")
 require("martinabeleda.plugins.gitsigns")
-
