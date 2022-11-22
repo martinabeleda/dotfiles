@@ -30,14 +30,7 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
 	-- Color schemes
-	use({
-		"projekt0n/github-nvim-theme",
-		config = function()
-			require("github-theme").setup({
-				theme_style = "dark",
-			})
-		end,
-	})
+	use("folke/tokyonight.nvim")
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
@@ -104,6 +97,7 @@ return packer.startup(function(use)
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
+	-- vim be good
 	use("ThePrimeagen/vim-be-good")
 
 	-- Automatically set up your configuration after cloning packer.nvim

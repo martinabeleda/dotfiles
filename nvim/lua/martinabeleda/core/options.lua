@@ -34,4 +34,3 @@ opt.splitbelow = true
 
 -- consider `-` as part of word
 opt.iskeyword:append("-")
-
