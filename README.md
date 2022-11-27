@@ -76,3 +76,11 @@ Symlink tmux config to `~/.config`
 ```shell
 ln -s ~/Development/martinabeleda/dotfiles/.tmux.conf ~/.tmux.conf
 ```
+
+## Git aliases
+
+Create symlink to home directory:
+
+```shell
+ln -s ~/Development/martinabeleda/dotfiles/git.sh ~/git.sh
+```

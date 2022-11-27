@@ -1,5 +1,6 @@
 # This file contains git short-cuts and commands users may find useful
 
+alias ga="git add -A"
 alias gs="git status"
 alias gco="git checkout"
 alias gc="git commit"

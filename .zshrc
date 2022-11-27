@@ -1,5 +1,7 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+
+# Source environment file
 source ~/.env
 
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
@@ -49,6 +51,9 @@ alias cdot="cd ~/Development/martinabeleda/dotfiles/"
 
 # Alias to reload zshrc
 alias szsh="source ~/.zshrc"
+
+# Git aliases
+source ~/git.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
