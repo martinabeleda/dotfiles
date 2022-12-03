@@ -55,6 +55,10 @@ Most of my neovim setup has been sourced from [josean](https://www.youtube.com/w
 ln -s ~/Development/martinabeleda/dotfiles/nvim ~/.config/nvim
 ```
 
+### Links
+
+- [Rust nvim guide](https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
+
 ## :rocket: starship prompt
 
 See the [starship docs](https://starship.rs/guide/#%F0%9F%9A%80-installation) for installation instructions. Starship should already be set up by virtue of installing our brew dependencies and symlinking the `.zshrc` file.
