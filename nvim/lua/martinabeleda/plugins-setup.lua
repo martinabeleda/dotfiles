@@ -31,6 +31,7 @@ return packer.startup(function(use)
 
 	-- Color schemes
 	use("folke/tokyonight.nvim")
+	use({ "rose-pine/neovim", as = "rose-pine" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
