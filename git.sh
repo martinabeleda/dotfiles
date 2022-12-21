@@ -2,7 +2,9 @@
 
 alias ga="git add -A"
 alias gs="git status"
-alias gco="git checkout"
+alias gch="git checkout"
+alias gcho="git checkout --ours --"
+alias gcht="git checkout --theirs --"
 alias gc="git commit"
 alias gcm="git commit -m"
 alias gp="git push"
