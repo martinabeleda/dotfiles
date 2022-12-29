@@ -55,6 +55,10 @@ alias szsh="source ~/.zshrc"
 # Git aliases
 source ~/git.sh
 
+batdiff() {
+    git diff --name-only --relative --diff-filter=d | xargs bat --diff
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
