@@ -35,6 +35,17 @@ brew bundle --file=Brewfile
 
 ## :hammer: zsh
 
+At this point, `zsh` should have been installed from the `Brewfile`. Verify this:
+
+```shell
+zsh --version
+```
+
+I'm using [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) to manage `zsh`. Install using the [basic installation](https://github.com/ohmyzsh/ohmyzsh#basic-installation):
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 Link `.zshrc` to `$HOME`:
 
 ```shell
