@@ -59,6 +59,13 @@ batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
+devbox() {
+    ssh -A dev156-uswest1adevc
+}
+
+# Alias to attach to tmux
+alias default="tmux attach -t default"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
