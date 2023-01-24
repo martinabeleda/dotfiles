@@ -74,6 +74,22 @@ Most of my neovim setup has been sourced from [josean](https://www.youtube.com/w
 ln -s ~/Development/martinabeleda/dotfiles/nvim ~/.config/nvim
 ```
 
+### :robot: copilot
+
+Copilot requires Node.js as a pre-requisite. I've installed this [here](https://nodejs.org/en/download)
+
+After that, you can run the setup from neovim:
+
+```
+:Copilot setup
+```
+
+After that you can find help by:
+
+```
+:help copilot
+```
+
 ### Links
 
 - [Rust nvim guide](https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
@@ -99,6 +115,11 @@ Symlink tmux config to `~/.config`
 ```shell
 ln -s ~/Development/martinabeleda/dotfiles/.tmux.conf ~/.tmux.conf
 ```
+
+### Installing plugins
+
+1. Add new plugin to `.tmux.conf` with `set -g @plugin '...'`
+1. Press `prefix` + `I` to fetch the plugin.
 
 ## Git aliases
 
