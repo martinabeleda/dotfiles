@@ -33,6 +33,12 @@ We use brew bundle to manage homebrew dependencies in a reproducible way:
 brew bundle --file=Brewfile
 ```
 
+To dump a `Brewfile` of current entries:
+
+```shell
+brew bundle dump --file=Brewfile
+```
+
 ## :hammer: zsh
 
 At this point, `zsh` should have been installed from the `Brewfile`. Verify this:
