@@ -39,6 +39,8 @@ To dump a `Brewfile` of current entries:
 brew bundle dump --file=Brewfile
 ```
 
+See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
+
 ## :hammer: zsh
 
 At this point, `zsh` should have been installed from the `Brewfile`. Verify this:
