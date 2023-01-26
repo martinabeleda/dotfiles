@@ -52,9 +52,6 @@ alias cdot="cd ~/Development/martinabeleda/dotfiles/"
 # Alias to reload zshrc
 alias szsh="source ~/.zshrc"
 
-# Git aliases
-source ~/git.sh
-
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
