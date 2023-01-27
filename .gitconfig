@@ -1,0 +1,27 @@
+[user]
+	email = martin.abeleda@gmail.com
+	name = martinabeleda
+
+[gui]
+    editor = vim
+
+[alias]
+    gpf = git push --force origin HEAD
+
+[color]
+    ui = true
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[pull]
+	rebase = true

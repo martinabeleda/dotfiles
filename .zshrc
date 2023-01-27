@@ -6,13 +6,14 @@ source ~/.env
 
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-eval "$(pyenv virtualenv-init -)"
-
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
-
-# Add fig to path
-export PATH=~/.fig/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.fig/bin:$PATH
+export PATH=$HOME/.poetry/bin:$PATH
+export PATH=/opt/homebrew/opt/libpq/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -23,17 +24,21 @@ zstyle ':omz:update' frequency 13
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    copydir
+    dotenv
     git
+    gitignore
+    tmux
+    web-search
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
   export EDITOR='nvim'
 fi
@@ -43,39 +48,27 @@ alias v="nvim"
 alias vim="nvim"
 
 # Aliases for project folders
-alias cstrava="cd ~/Development/martinabeleda/strava/ && poetry shell"
-alias cleet="cd ~/Development/martinabeleda/leetcode/ && poetry shell"
-alias cathena="cd ~/Development/martinabeleda/athena/"
-alias caoc="cd ~/Development/martinabeleda/advent-of-code/"
-alias cdot="cd ~/Development/martinabeleda/dotfiles/"
+export DEVELOPMENT="$HOME/Development"
+export MARTINABELEDA="$DEVELOPMENT/martinabeleda"
+alias cstrava="cd $MARTINABELEDA/strava/ && poetry shell"
+alias cathena="cd $MARTINABELEDA/athena/"
+alias caoc="cd $MARTINABELEDA/advent-of-code/"
+alias cdot="cd $MARTINABELEDA/dotfiles/"
 
-# Alias to reload zshrc
-alias szsh="source ~/.zshrc"
+# Aliases for tmux sessions
+alias default="tmux attach -t default"
 
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
-devbox() {
-    ssh -A dev156-uswest1adevc
-}
-
-# Alias to attach to tmux
-alias default="tmux attach -t default"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export PATH="$HOME/.poetry/bin:$PATH"
-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Start spotifyd
+brew services start spotifyd
 
 eval "$(starship init zsh)"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
-# Start spotifyd
-brew services start spotifyd

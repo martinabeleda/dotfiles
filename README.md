@@ -11,6 +11,12 @@ git clone https://github.com/martinabeleda/dotfiles.git
 cd dotfiles
 ```
 
+Link all dotfiles and install plugins:
+
+```shell
+./install.sh
+```
+
 Install mac developer tools **without** installing XCode:
 
 ```shell
@@ -54,11 +60,6 @@ I'm using [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) to manage `zsh`. Insta
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
-Link `.zshrc` to `$HOME`:
-
-```shell
-ln -s ~/Development/martinabeleda/dotfiles/.zshrc ~/.zshrc
-```
 
 Change shell to zsh:
 
@@ -69,10 +70,6 @@ chsh -s /usr/local/bin/zsh
 ## :wrench: nvim
 
 Most of my neovim setup has been sourced from [josean](https://www.youtube.com/watch?v=vdn_pKJUda8)
-
-```shell
-ln -s ~/Development/martinabeleda/dotfiles/nvim ~/.config/nvim
-```
 
 ### :robot: copilot
 
@@ -98,33 +95,9 @@ After that you can find help by:
 
 See the [starship docs](https://starship.rs/guide/#%F0%9F%9A%80-installation) for installation instructions. Starship should already be set up by virtue of installing our brew dependencies and symlinking the `.zshrc` file.
 
-```shell
-ln -s ~/Development/martinabeleda/dotfiles/starship.toml ~/.config/starship.toml
-```
-
 ## :package: tmux
-
-Install the tmux plugin manager:
-
-```shell
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-Symlink tmux config to `~/.config`
-
-```shell
-ln -s ~/Development/martinabeleda/dotfiles/.tmux.conf ~/.tmux.conf
-```
 
 ### Installing plugins
 
 1. Add new plugin to `.tmux.conf` with `set -g @plugin '...'`
 1. Press `prefix` + `I` to fetch the plugin.
-
-## Git aliases
-
-Create symlink to home directory:
-
-```shell
-ln -s ~/Development/martinabeleda/dotfiles/git.sh ~/git.sh
-```
