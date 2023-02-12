@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+	<title>Mail Filters</title>
+	<id>tag:mail.google.com,2008:filters:z0000001673903250852*4575983299089772516,z0000001674420969688*3062877571626494808,z0000001674421048835*1269085063518114849,z0000001674673810729*5977980720396329528,z0000001674673916346*2779760011541654928,z0000001674673971239*4231993012821855500,z0000001674674069366*5754752810509348166,z0000001675382246018*6091038543615863449,z0000001675382294949*0936878343009803418,z0000001675459448951*8781375682922073514,z0000001675459481874*3994871011810209802,z0000001675976427792*6229412807179977857,z0000001676234329959*6854575519756873825,z0000001676234374658*0890611431915496047</id>
+	<updated>2023-02-12T21:00:30Z</updated>
+	<author>
+		<name>Martin Abeleda</name>
+		<email>martin.abeleda@gmail.com</email>
+	</author>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001673903250852*4575983299089772516</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='auto-confirm@amazon.ca'/>
+		<apps:property name='label' value='Shopping'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674420969688*3062877571626494808</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='noreply-travel@google.com'/>
+		<apps:property name='label' value='Travel/Trips/2023/Australia'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674421048835*1269085063518114849</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='shipment-tracking@amazon.ca'/>
+		<apps:property name='label' value='Shopping'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674673810729*5977980720396329528</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='no_reply@email.apple.com'/>
+		<apps:property name='subject' value='Your receipt'/>
+		<apps:property name='label' value='Financial/Receipts'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674673916346*2779760011541654928</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='no-reply@lyftmail.com'/>
+		<apps:property name='subject' value='Your ride'/>
+		<apps:property name='label' value='Financial/Receipts'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674673971239*4231993012821855500</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='telusbilling@info.telus.com'/>
+		<apps:property name='label' value='Bills'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001674674069366*5754752810509348166</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='Business604825@mindbodyonline.com'/>
+		<apps:property name='subject' value='The Yoga Bar Reservation'/>
+		<apps:property name='label' value='Fitness/Yoga'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001675382246018*6091038543615863449</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='FidoBill@fidomobile.ca'/>
+		<apps:property name='label' value='Bills'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001675382294949*0936878343009803418</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='billing@qmeters.com'/>
+		<apps:property name='label' value='Bills'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001675459448951*8781375682922073514</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='notifications@bchydro.com'/>
+		<apps:property name='label' value='Bills'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001675459481874*3994871011810209802</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='aws-ca-receivables-support@email.amazon.com'/>
+		<apps:property name='label' value='Bills'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001675976427792*6229412807179977857</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='support@snaile.com'/>
+		<apps:property name='label' value='Shopping'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001676234329959*6854575519756873825</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='notify@payments.interac.ca'/>
+		<apps:property name='label' value='Financial/Banking'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001676234374658*0890611431915496047</id>
+		<updated>2023-02-12T21:00:30Z</updated>
+		<content></content>
+		<apps:property name='from' value='contact@westlandexpress.ca'/>
+		<apps:property name='label' value='Rental'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+</feed>
