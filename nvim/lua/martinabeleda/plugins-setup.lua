@@ -126,6 +126,7 @@ return packer.startup(function(use)
 	use("ThePrimeagen/vim-be-good")
 
 	use("mbbill/undotree")
+	use("tpope/vim-fugitive")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	if packer_bootstrap then
