@@ -70,6 +70,11 @@ rust_tools.setup({
 			vim.keymap.set("n", "<Leader>a", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
 		end,
 	},
+	inlay_hints = {
+		show_parameter_hints = true,
+		parameter_hints_prefix = "<- ",
+		other_hints_prefix = "=> ",
+	},
 })
 
 -- configure python server

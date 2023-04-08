@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "Base directory: ${BASEDIR}"
 
 # nvim
 ln -s ${BASEDIR}/nvim ~/.config/nvim
