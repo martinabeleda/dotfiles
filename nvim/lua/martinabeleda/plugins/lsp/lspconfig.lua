@@ -78,6 +78,16 @@ rust_tools.setup({
 	},
 })
 
+lspconfig["rust_analyzer"].setup({
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+			},
+		},
+	},
+})
+
 -- configure python server
 lspconfig["pyright"].setup({
 	capabilities = capabilities,
