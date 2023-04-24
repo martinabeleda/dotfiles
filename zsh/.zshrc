@@ -46,6 +46,7 @@ fi
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
 alias vim="nvim"
+alias lh="ls -alh"
 
 # Aliases for project folders
 export DEVELOPMENT="$HOME/Development"

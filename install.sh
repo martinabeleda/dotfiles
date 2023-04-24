@@ -3,21 +3,49 @@
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "Base directory: ${BASEDIR}"
 
-# nvim
-ln -s ${BASEDIR}/nvim ~/.config/nvim
+# Add an argument for the flag
+UNLINK_FLAG=$1
 
-# zsh
-ln -s ${BASEDIR}/zshrc ~/.zshrc
+# Function for linking
+link_configs() {
+    echo "Linking nvim to ~/.config/nvim/"
+    ln -s ${BASEDIR}/nvim ~/.config/nvim
 
-# zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    echo "Linking zsh dotfiles to ~/"
+    ln -s ${BASEDIR}/zsh/.zshrc ~/.zshrc
+    ln -s ${BASEDIR}/zsh/.zprofile ~/.zprofile
 
-# git
-ln -s ${BASEDIR}/gitconfig ~/.gitconfig
+    echo "Installing zsh plugins"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# starship
-ln -s ${BASEDIR}/starship.toml ~/.config/starship.toml
+    echo "Linking .gitconfig to ~/"
+    ln -s ${BASEDIR}/.gitconfig ~/.gitconfig
 
-# tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-ln -s ${BASEDIR}/.tmux.conf ~/.tmux.conf
+    echo "Linking starship.toml"
+    ln -s ${BASEDIR}/starship.toml ~/.config/starship.toml
+
+    echo "Installing tmux and tmux-plugins"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ln -s ${BASEDIR}/tmux/.tmux.conf ~/.tmux.conf
+}
+
+# Function for unlinking
+unlink_configs() {
+    unlink ~/.config/nvim
+    unlink ~/.zshrc
+    unlink ~/.zprofile
+    unlink ~/.gitconfig
+    unlink ~/.config/starship.toml
+    rm -rf ~/.tmux/plugins/tpm
+    unlink ~/.tmux.conf
+    rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+}
+
+# Check the flag and call the appropriate function
+if [ "$UNLINK_FLAG" == "--unlink" ]; then
+  echo "Unlinking symlinks..."
+  unlink_configs
+else
+  echo "Creating symlinks..."
+  link_configs
+fi
