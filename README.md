@@ -42,7 +42,7 @@ brew bundle --file=Brewfile
 To dump a `Brewfile` of current entries:
 
 ```shell
-brew bundle dump --file=Brewfile
+rm Brewfile && brew bundle dump --file=Brewfile
 ```
 
 See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
