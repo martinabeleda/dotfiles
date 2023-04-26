@@ -62,6 +62,8 @@ alias cdot="cd $MARTINABELEDA/dotfiles/"
 # Aliases for tmux sessions
 alias default="tmux attach -t default"
 
+alias maelstrom=$MARTINABELEDA/nautilus/maelstrom/maelstrom
+
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
