@@ -63,6 +63,10 @@ batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
+gcl() {
+    git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d
+}
+
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
