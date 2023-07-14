@@ -4,8 +4,6 @@
 # Source environment file
 source ~/.env
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 # If you come from bash you might have to change your $PATH.
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
@@ -14,6 +12,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.fig/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
 export PATH=/opt/homebrew/opt/libpq/bin:$PATH
+export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
+
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -25,7 +26,7 @@ zstyle ':omz:update' frequency 13
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
-    copydir
+    copypath
     dotenv
     git
     gitignore
@@ -59,6 +60,8 @@ alias cdot="cd $MARTINABELEDA/dotfiles/"
 # Aliases for tmux sessions
 alias default="tmux attach -t default"
 
+alias maelstrom=$MARTINABELEDA/nautilus/maelstrom/maelstrom
+
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
@@ -70,10 +73,13 @@ gcl() {
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-# Start spotifyd
-brew services start spotifyd
-
 eval "$(starship init zsh)"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
