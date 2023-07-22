@@ -29,9 +29,6 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	-- Github Copilot
-	use({ "github/copilot.vim", branch = "release" })
-
 	-- Color schemes
 	use("folke/tokyonight.nvim")
 	use({ "rose-pine/neovim", as = "rose-pine" })
@@ -106,6 +103,15 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
+	-- scala
+	use({
+		"scalameta/nvim-metals",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap",
+		},
+	})
+
 	-- treesitter configuration
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -121,9 +127,6 @@ return packer.startup(function(use)
 
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
-
-	-- vim be good
-	use("ThePrimeagen/vim-be-good")
 
 	use("mbbill/undotree")
 	use("tpope/vim-fugitive")
