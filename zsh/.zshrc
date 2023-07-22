@@ -60,6 +60,8 @@ alias cdot="cd $MARTINABELEDA/dotfiles/"
 # Aliases for tmux sessions
 alias default="tmux attach -t default"
 
+alias fm="frogmouth"
+
 alias maelstrom=$MARTINABELEDA/nautilus/maelstrom/maelstrom
 
 batdiff() {
