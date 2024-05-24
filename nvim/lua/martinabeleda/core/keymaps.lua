@@ -21,3 +21,20 @@ keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
+
+----------------------
+-- Copilot Keybinds
+----------------------
+
+keymap.set("n", "<leader>cco", ":CopilotChatOpen<CR>")
+keymap.set("n", "<leader>ccr", ":CopilotChatReset<CR>")
+keymap.set("n", "<leader>ccs", ":CopilotChatStop<CR>")
+keymap.set("n", "<leader>cce", ":CopilotChatExplain<CR>")
+keymap.set("n", "<leader>ccrv", ":CopilotChatReview<CR>")
+keymap.set("n", "<leader>ccf", ":CopilotChatFix<CR>")
+keymap.set("n", "<leader>ccop", ":CopilotChatOptimize<CR>")
+keymap.set("n", "<leader>ccd", ":CopilotChatDocs<CR>")
+keymap.set("n", "<leader>cct", ":CopilotChatTests<CR>")
+keymap.set("n", "<leader>ccfd", ":CopilotChatFixDiagnostic<CR>")
+keymap.set("n", "<leader>ccc", ":CopilotChatCommit<CR>")
+keymap.set("n", "<leader>cccs", ":CopilotChatCommitStaged<CR>")

@@ -29,12 +29,26 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
 		["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
 		["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		["<Tab>"] = cmp.mapping.select_next_item(),
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
 		["<C-e>"] = cmp.mapping.abort(), -- close completion window
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			local copilot_keys = vim.fn["copilot#Accept"]()
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
+				vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			else
+				fallback()
+			end
+		end, {
+			"i",
+			"s",
+		}),
 	}),
 	-- sources for autocompletion
 	sources = cmp.config.sources({

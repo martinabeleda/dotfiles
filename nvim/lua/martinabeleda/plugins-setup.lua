@@ -29,6 +29,23 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
+	-- Github Copilot
+	use({ "github/copilot.vim" })
+	use({
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "canary",
+		requires = {
+			{ "zbirenbaum/copilot.lua" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+		config = function()
+			require("CopilotChat").setup({
+				debug = true, -- Enable debugging
+				model = "gpt-4", -- GPT model to use, 'gpt-3.5-turbo' or 'gpt-4'
+			})
+		end,
+	})
+
 	-- Color schemes
 	use("folke/tokyonight.nvim")
 	use({ "rose-pine/neovim", as = "rose-pine" })
