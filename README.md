@@ -36,13 +36,13 @@ Install homebrew:
 We use brew bundle to manage homebrew dependencies in a reproducible way:
 
 ```shell
-brew bundle --file=Brewfile
+brew bundle --file=brew/Brewfile
 ```
 
 To dump a `Brewfile` of current entries:
 
 ```shell
-rm Brewfile && brew bundle dump --file=Brewfile
+rm brew/Brewfile && brew bundle dump --file=brew/Brewfile
 ```
 
 See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
