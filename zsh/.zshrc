@@ -1,6 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
 # Source environment file
 source ~/.env
 
@@ -18,6 +15,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+source ~/.bash_profile
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
@@ -82,6 +81,3 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
