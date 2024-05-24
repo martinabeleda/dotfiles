@@ -8,6 +8,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.fig/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/opt/libpq/bin:$PATH
 export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
 
@@ -67,7 +68,7 @@ batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
-gcl() {
+git_cleanup() {
     git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d
 }
 

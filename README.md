@@ -1,5 +1,7 @@
 # dotfiles
 
+![main workflow](https://github.com/martinabeleda/dotfiles/actions/workflows/build.yaml/badge.svg)
+
 A collection of my configuration and dotfiles for easy setup
 
 ## :construction: setup
@@ -14,8 +16,10 @@ cd dotfiles
 Link all dotfiles and install plugins:
 
 ```shell
-./install.sh
+./install
 ```
+
+This is managed by [dotbot](https://github.com/anishathalye/dotbot)
 
 Install mac developer tools **without** installing XCode:
 
