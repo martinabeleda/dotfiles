@@ -57,11 +57,6 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 
-	-- autocompletion
-	use("hrsh7th/nvim-cmp") -- completion plugin
-	use("hrsh7th/cmp-buffer") -- source for text in buffer
-	use("hrsh7th/cmp-path") -- source for file system paths
-
 	-- snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
 	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
@@ -73,25 +68,16 @@ return packer.startup(function(use)
 
 	-- configuring lsp servers
 	use("neovim/nvim-lspconfig") -- easily configure language servers
-	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-	use({
-		"glepnir/lspsaga.nvim",
-		opt = true,
-		branch = "main",
-		event = "LspAttach",
-		config = function()
-			require("lspsaga").setup({})
-		end,
-		requires = {
-			{ "nvim-tree/nvim-web-devicons" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	})
+	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 	use("simrat39/rust-tools.nvim")
 
+	-- autocompletion
+	use("hrsh7th/nvim-cmp") -- completion plugin
+
 	-- Useful completion sources
+	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-nvim-lua")
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/cmp-vsnip")
