@@ -12,5 +12,9 @@ jobs:
       - run: |
           mkdir -p ~/dotfiles-install-dir
           mkdir -p ~/dotfiles-install-dir/.config
+      - name: Install Zsh
+        run: sudo apt-get install -y zsh
       - run: |
+          export RUNZSH=no
+          export CHSH=no
           HOME=~/dotfiles-install-dir ./install
