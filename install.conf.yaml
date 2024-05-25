@@ -11,7 +11,7 @@
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
         Installing Oh My Zsh,
       ]
-    - [rm ~/.zshrc, Removing existing .zshrc created by Oh My Zsh]
+    - [rm -f ~/.zshrc, Removing existing .zshrc created by Oh My Zsh]
     - [touch ~/.env, Creating .env file if it doesn't exist]
     - [touch ~/.bash_profile, Creating .bash_profile file if it doesn't exist]
 
