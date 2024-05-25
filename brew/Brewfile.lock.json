@@ -2,16 +2,16 @@
   "entries": {
     "tap": {
       "hashicorp/tap": {
-        "revision": "922f237793f9f215ce737d11b4483a1645cd3d35"
+        "revision": "ba2a0f02eceac38715d557d27c1ad2cc58189d72"
       },
       "homebrew/bundle": {
-        "revision": "c9fe197731564e3a352680f59f957eeb854081fa"
+        "revision": "011f75aa0d27cfd78a60be4f3e0803e2f0a032de"
       },
       "homebrew/core": {
         "revision": "4113c35d80da6ebd1d1a544513340205b1cf7c84"
       },
       "homebrew/services": {
-        "revision": "20aced0ba1763ab9cf1afa3c9a0c24261d8dd90b"
+        "revision": "03becef9fd05300ae123447c0172aa00278594ec"
       },
       "homebrew/cask": {
         "revision": "bcd8ecb74cef8a22f088376584b0ee1bd0682656"

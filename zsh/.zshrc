@@ -1,12 +1,7 @@
-# Source environment file
-source ~/.env
-
-# If you come from bash you might have to change your $PATH.
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.fig/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/opt/libpq/bin:$PATH
@@ -17,6 +12,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+source ~/.env
 source ~/.bash_profile
 
 zstyle ':omz:update' mode auto      # update automatically without asking

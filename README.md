@@ -13,23 +13,7 @@ git clone https://github.com/martinabeleda/dotfiles.git
 cd dotfiles
 ```
 
-Link all dotfiles and install plugins:
-
-```shell
-./install
-```
-
-This is managed by [dotbot](https://github.com/anishathalye/dotbot)
-
-Install mac developer tools **without** installing XCode:
-
-```shell
-touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-softwareupdate -i -a
-rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-```
-
-## :beers: brew
+### :beers: brew
 
 Install homebrew:
 
@@ -37,7 +21,7 @@ Install homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-We use brew bundle to manage homebrew dependencies in a reproducible way:
+We use brew bundle to manage homebrew dependencies in a reproducible way. To install all dependencies:
 
 ```shell
 brew bundle --file=brew/Brewfile
@@ -51,29 +35,45 @@ rm brew/Brewfile && brew bundle dump --file=brew/Brewfile
 
 See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
-## :hammer: zsh
+### :green_apple: apple command line tools
 
-At this point, `zsh` should have been installed from the `Brewfile`. Verify this:
-
-```shell
-zsh --version
-```
-
-I'm using [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) to manage `zsh`. Install using the [basic installation](https://github.com/ohmyzsh/ohmyzsh#basic-installation):
+Install mac developer tools **without** installing XCode:
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+softwareupdate -i -a
+rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 ```
+
+### :robot: dotbot
+
+Link all dotfiles and install plugins:
+
+```shell
+./install
+```
+
+This is managed by [dotbot](https://github.com/anishathalye/dotbot)
+
+### :hammer: zsh
 
 Change shell to zsh:
 
 ```shell
-chsh -s /usr/local/bin/zsh
+zsh
 ```
 
 ## :wrench: nvim
 
 Most of my neovim setup has been sourced from [josean](https://www.youtube.com/watch?v=vdn_pKJUda8)
+
+### :postbox: packer
+
+Packer manages neovim plugins. To set everything up, run packer sync:
+
+```shell
+:PackerSync
+```
 
 ### :robot: copilot
 
@@ -89,6 +89,12 @@ After that you can find help by:
 
 ```
 :help copilot
+```
+
+Check copilot status:
+
+```
+:Copilot setup
 ```
 
 ### Links
