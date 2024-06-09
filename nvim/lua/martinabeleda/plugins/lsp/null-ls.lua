@@ -21,6 +21,7 @@ null_ls.setup({
 		formatting.prettier,
 		formatting.stylua,
 		formatting.black,
+		formatting.clang_format,
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
