@@ -25,14 +25,21 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
+    aws
     copypath
+    docker
     dotenv
+    emoji
+    fzf-tab
     git
     gitignore
+    kubectl
+    pre-commit
+    ripgrep
     tmux
     web-search
     zsh-autosuggestions
-    fzf-tab
+    zoxide
 )
 
 source $ZSH/oh-my-zsh.sh
