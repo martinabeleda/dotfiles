@@ -18,6 +18,9 @@ source ~/.bash_profile
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
 
+# make use of fzf-tab popup feature https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#tmux
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -29,6 +32,7 @@ plugins=(
     tmux
     web-search
     zsh-autosuggestions
+    fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
