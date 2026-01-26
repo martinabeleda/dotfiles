@@ -58,8 +58,6 @@ cmp.setup({
 		{ name = "luasnip" }, -- snippets
 		{ name = "buffer" }, -- text within current buffer
 		{ name = "path" }, -- file system paths
-		{ name = "vsnip", keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
-		{ name = "calc" }, -- source for math calculation
 	}),
 	-- configure lspkind for vs-code like icons
 	formatting = {

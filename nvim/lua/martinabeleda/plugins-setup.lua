@@ -31,23 +31,8 @@ return packer.startup(function(use)
 
 	-- Github Copilot
 	use({ "github/copilot.vim" })
-	use({
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
-		requires = {
-			{ "zbirenbaum/copilot.lua" },
-			{ "nvim-lua/plenary.nvim" },
-		},
-		config = function()
-			require("CopilotChat").setup({
-				debug = true, -- Enable debugging
-				model = "gpt-4", -- GPT model to use, 'gpt-3.5-turbo' or 'gpt-4'
-			})
-		end,
-	})
 
 	-- Color schemes
-	use("folke/tokyonight.nvim")
 	use({ "rose-pine/neovim", as = "rose-pine" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
@@ -97,10 +82,8 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-nvim-lua")
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
-	use("hrsh7th/cmp-vsnip")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/vim-vsnip")
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
