@@ -29,10 +29,11 @@
         Installing zsh plugins,
       ]
     - [
-        git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab
+        git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab,
         Installing fzf-tab plugin,
       ]
+    - [rm -rf ~/.tmux/plugins/tpm, Removing existing tmux plugin manager]
     - [
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm,
-        Installing tmux and tmux-plugins,
+        Installing tmux plugin manager,
       ]
