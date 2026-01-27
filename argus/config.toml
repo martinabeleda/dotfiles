@@ -1,0 +1,52 @@
+[general]
+check_interval = 30
+log_level = "info"
+
+[system.cpu]
+enabled = true
+# Alert when CPU usage exceeds this percentage
+threshold = 85.0
+# Number of samples for rolling average (at 30s interval, 10 = 5 minutes)
+rolling_window = 10
+# Only alert after threshold exceeded for this duration (seconds)
+sustained_duration = 300
+
+[system.memory]
+enabled = true
+threshold = 90.0
+rolling_window = 10
+sustained_duration = 300
+
+[system.temperature]
+enabled = true
+threshold = 80.0
+critical_threshold = 85.0
+
+[[services]]
+name = "waypoint"
+type = "docker-compose"
+health_url = "http://localhost:3001/api/health"
+compose_file = "/home/mabeleda/Development/waypoint/docker-compose.yml"
+
+[services.recovery]
+enabled = true
+max_attempts = 3
+retry_delay_secs = 30
+
+[[services]]
+name = "pihole"
+type = "systemd"
+systemd_unit = "pihole-FTL.service"
+dns_check = "google.com"
+
+[services.recovery]
+enabled = true
+max_attempts = 3
+retry_delay_secs = 30
+
+[telegram]
+enabled = true
+# Set these via environment variables or update locally (do not commit secrets)
+bot_token = ""
+chat_id = ""
+cooldown_secs = 300
