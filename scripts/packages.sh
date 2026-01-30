@@ -11,6 +11,9 @@ install_packages() {
     
     case "$DOTFILES_OS" in
         macos)
+            # Install Command Line Tools first (required for many dev tools)
+            "$SCRIPTS_DIR/install-macos-clt.sh"
+            
             if command -v brew &>/dev/null; then
                 brew bundle --file="$PACKAGES_DIR/Brewfile"
             else
