@@ -40,7 +40,6 @@ plugins=(
     gitignore
     kubectl
     pre-commit
-    ripgrep
     tmux
     web-search
     zsh-autosuggestions
