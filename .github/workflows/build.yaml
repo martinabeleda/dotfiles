@@ -1,20 +1,89 @@
 name: CI
+
 on:
   push:
   pull_request:
   schedule:
     - cron: "0 8 * * 6"
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            name: macOS
+          - os: ubuntu-latest
+            name: Ubuntu
+            
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
+    
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          mkdir -p ~/dotfiles-install-dir
-          mkdir -p ~/dotfiles-install-dir/.config
-      - name: Install Zsh
-        run: sudo apt-get install -y zsh
-      - run: |
+      - uses: actions/checkout@v4
+      
+      - name: Setup test environment
+        run: |
+          mkdir -p ~/dotfiles-test
+          mkdir -p ~/dotfiles-test/.config
+          
+      - name: Install Zsh (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y zsh
+        
+      - name: Run install
+        run: |
           export RUNZSH=no
           export CHSH=no
-          HOME=~/dotfiles-install-dir ./install
+          HOME=~/dotfiles-test ./install
+          
+      - name: Verify shell config loads
+        run: |
+          export HOME=~/dotfiles-test
+          zsh -c 'source ~/.zprofile 2>/dev/null || true; source ~/.zshrc' 2>&1
+
+  test-containers:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - container: debian:bookworm
+            name: Debian
+          - container: archlinux:latest
+            name: Arch Linux
+            
+    runs-on: ubuntu-latest
+    name: ${{ matrix.name }}
+    container: ${{ matrix.container }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install dependencies (Debian)
+        if: contains(matrix.container, 'debian')
+        run: |
+          apt-get update
+          apt-get install -y zsh git curl sudo
+          
+      - name: Install dependencies (Arch)
+        if: contains(matrix.container, 'archlinux')
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm zsh git curl sudo base-devel
+          
+      - name: Setup test environment
+        run: |
+          mkdir -p ~/dotfiles-test
+          mkdir -p ~/dotfiles-test/.config
+          
+      - name: Run install
+        run: |
+          export RUNZSH=no
+          export CHSH=no
+          HOME=~/dotfiles-test ./install
+          
+      - name: Verify shell config loads
+        run: |
+          export HOME=~/dotfiles-test
+          zsh -c 'source ~/.zprofile 2>/dev/null || true; source ~/.zshrc' 2>&1
