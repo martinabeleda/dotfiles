@@ -48,12 +48,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
+# Preferred editor
+export EDITOR='nvim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
@@ -95,7 +91,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if command -v pyenv-virtualenv-init &>/dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # better cd command
 eval "$(zoxide init zsh)"

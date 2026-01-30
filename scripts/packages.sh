@@ -4,6 +4,12 @@
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPTS_DIR/detect-os.sh"
 
+# Helper function to filter package lists (removes comments and empty lines)
+filter_package_list() {
+    local file="$1"
+    grep -v '^#' "$file" | grep -v '^$'
+}
+
 install_packages() {
     local PACKAGES_DIR="$(dirname "$SCRIPTS_DIR")/packages"
     
@@ -27,7 +33,7 @@ install_packages() {
             
             if [ -f "$PACKAGES_DIR/apt-packages.txt" ]; then
                 # Filter out comments and empty lines, then install
-                grep -v '^#' "$PACKAGES_DIR/apt-packages.txt" | grep -v '^$' | xargs sudo apt install -y
+                filter_package_list "$PACKAGES_DIR/apt-packages.txt" | xargs sudo apt install -y
             fi
             
             # Install tools not available in apt repos
@@ -35,12 +41,13 @@ install_packages() {
             "$SCRIPTS_DIR/install-zoxide.sh"
             ;;
         arch)
-            if [ -f "$PACKAGES_DIR/pacman-packages.txt" ]; then
+            local pacman_file="$PACKAGES_DIR/pacman-packages.txt"
+            if [ -f "$pacman_file" ] && [ -s "$pacman_file" ]; then
                 # Use yay if available for AUR support, otherwise pacman
                 if command -v yay &>/dev/null; then
-                    grep -v '^#' "$PACKAGES_DIR/pacman-packages.txt" | grep -v '^$' | yay -S --needed --noconfirm -
+                    filter_package_list "$pacman_file" | xargs yay -S --needed --noconfirm
                 else
-                    grep -v '^#' "$PACKAGES_DIR/pacman-packages.txt" | grep -v '^$' | sudo pacman -S --needed --noconfirm -
+                    filter_package_list "$pacman_file" | xargs sudo pacman -S --needed --noconfirm
                 fi
             fi
             ;;

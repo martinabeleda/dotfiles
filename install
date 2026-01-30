@@ -26,7 +26,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
 # Optional: Install packages with --packages or -p flag
-if [[ "$1" == "--packages" ]] || [[ "$1" == "-p" ]]; then
+if [[ "$*" == *"--packages"* ]] || [[ "$*" == *"-p"* ]]; then
     source "$BASEDIR/scripts/packages.sh"
     install_packages
 fi
