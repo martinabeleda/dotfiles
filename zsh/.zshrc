@@ -1,19 +1,24 @@
+# Universal paths
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/opt/libpq/bin:$PATH
-export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
 
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+# macOS-specific paths (Homebrew)
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    export PATH=/opt/homebrew/bin:$PATH
+    export PATH=/opt/homebrew/opt/libpq/bin:$PATH
+    export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
+    export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-source ~/.env
-source ~/.bash_profile
+# Source env files if they exist
+[ -f ~/.env ] && source ~/.env
+[ -f ~/.bash_profile ] && source ~/.bash_profile
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
@@ -79,8 +84,11 @@ git_cleanup() {
     git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d
 }
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+# macOS-specific completions
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    autoload -U +X bashcompinit && bashcompinit
+    [ -f /opt/homebrew/bin/terraform ] && complete -o nospace -C /opt/homebrew/bin/terraform terraform
+fi
 
 eval "$(starship init zsh)"
 
