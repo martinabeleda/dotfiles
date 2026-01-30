@@ -1,6 +1,4 @@
 tap "hashicorp/tap"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "modularml/packages"
 brew "xz"
 brew "libtiff"

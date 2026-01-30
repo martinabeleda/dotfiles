@@ -58,20 +58,20 @@ jobs:
     container: ${{ matrix.container }}
     
     steps:
-      - uses: actions/checkout@v4
-      
       - name: Install dependencies (Debian)
         if: contains(matrix.container, 'debian')
         run: |
           apt-get update
           apt-get install -y zsh git curl sudo
-          
+
       - name: Install dependencies (Arch)
         if: contains(matrix.container, 'archlinux')
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm zsh git curl sudo base-devel
-          
+
+      - uses: actions/checkout@v4
+
       - name: Setup test environment
         run: |
           mkdir -p ~/dotfiles-test

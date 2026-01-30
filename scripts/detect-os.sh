@@ -36,5 +36,6 @@ detect_hostname() {
 }
 
 # Export for use by other scripts
-export DOTFILES_OS=$(detect_os)
-export DOTFILES_HOSTNAME=$(detect_hostname)
+DOTFILES_OS="$(detect_os)"
+DOTFILES_HOSTNAME="$(detect_hostname)"
+export DOTFILES_OS DOTFILES_HOSTNAME

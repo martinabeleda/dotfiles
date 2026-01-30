@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 # Package installation abstraction for multiple platforms
 
+set -euo pipefail
+
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPTS_DIR/detect-os.sh"
 
 # Helper function to filter package lists (removes comments and empty lines)
 filter_package_list() {
     local file="$1"
-    grep -v '^#' "$file" | grep -v '^$'
+    grep -v '^#' "$file" | grep -v '^$' || true
 }
 
 install_packages() {
-    local PACKAGES_DIR="$(dirname "$SCRIPTS_DIR")/packages"
+    local PACKAGES_DIR
+    PACKAGES_DIR="$(dirname "$SCRIPTS_DIR")/packages"
     
     echo "Installing packages for $DOTFILES_OS..."
     

@@ -9,8 +9,19 @@ export PATH=$HOME/.poetry/bin:$PATH
 if [[ "$(uname -s)" == "Darwin" ]]; then
     export PATH=/opt/homebrew/bin:$PATH
     export PATH=/opt/homebrew/opt/libpq/bin:$PATH
-    export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
-    export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+    # Detect available OpenJDK version
+    if [[ -d /opt/homebrew/opt/openjdk@11 ]]; then
+        export PATH=/opt/homebrew/opt/openjdk@11/bin:$PATH
+        export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
+    elif [[ -d /opt/homebrew/opt/openjdk@17 ]]; then
+        export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
+        export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+    fi
+fi
+
+# Alias bat to batcat on Debian/Ubuntu (package name conflict)
+if [[ -f /usr/bin/batcat ]] && ! command -v bat &>/dev/null; then
+    alias bat="batcat"
 fi
 
 # Path to your oh-my-zsh installation.
