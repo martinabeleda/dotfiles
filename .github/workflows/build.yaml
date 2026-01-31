@@ -84,8 +84,8 @@ jobs:
         run: |
           export RUNZSH=no
           export CHSH=no
-          # Set safe.directory for the test HOME where git will look for config
-          HOME=~/dotfiles-test git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          # Set safe.directory at system level so it persists after dotbot replaces gitconfig
+          git config --system --add safe.directory "$GITHUB_WORKSPACE"
           HOME=~/dotfiles-test ./install
 
       - name: Verify shell config loads
