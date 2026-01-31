@@ -64,13 +64,14 @@ jobs:
         if: contains(matrix.container, 'debian')
         run: |
           apt-get update
-          apt-get install -y zsh git curl sudo
+          apt-get install -y zsh git curl sudo python3
+          ln -sf /usr/bin/python3 /usr/bin/python
 
       - name: Install dependencies (Arch)
         if: contains(matrix.container, 'archlinux')
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm zsh git curl sudo base-devel
+          pacman -S --noconfirm zsh git curl sudo base-devel python
 
       - uses: actions/checkout@v4
 
