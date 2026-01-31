@@ -7,6 +7,17 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Source OS detection
 source "$BASEDIR/scripts/detect-os.sh"
 
+# Parse arguments - separate our flags from dotbot flags
+install_pkgs=false
+dotbot_args=()
+for arg in "$@"; do
+    if [[ "$arg" == "--packages" || "$arg" == "-p" ]]; then
+        install_pkgs=true
+    else
+        dotbot_args+=("$arg")
+    fi
+done
+
 echo "=========================================="
 echo "Dotfiles Installation"
 echo "=========================================="
@@ -23,16 +34,9 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${dotbot_args[@]}"
 
 # Optional: Install packages with --packages or -p flag
-install_pkgs=false
-for arg in "$@"; do
-    if [[ "$arg" == "--packages" || "$arg" == "-p" ]]; then
-        install_pkgs=true
-        break
-    fi
-done
 if [[ "$install_pkgs" == true ]]; then
     source "$BASEDIR/scripts/packages.sh"
     install_packages
