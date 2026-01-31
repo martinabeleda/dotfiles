@@ -17,6 +17,7 @@
 
 - link:
     ~/.config/nvim: nvim
+    ~/.config/ghostty/config: ghostty/config
     ~/.zshrc: zsh/.zshrc
     ~/.zprofile: zsh/.zprofile
     ~/.gitconfig: .gitconfig
