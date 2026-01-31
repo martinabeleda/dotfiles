@@ -35,16 +35,6 @@ rm brew/Brewfile && brew bundle dump --file=brew/Brewfile
 
 See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
-### :green_apple: apple command line tools
-
-Install mac developer tools **without** installing XCode:
-
-```shell
-touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-softwareupdate -i -a
-rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-```
-
 ### :robot: dotbot
 
 Link all dotfiles and install plugins:

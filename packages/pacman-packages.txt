@@ -1,0 +1,26 @@
+# Core tools
+zsh
+git
+curl
+wget
+htop
+tmux
+neovim
+ripgrep
+bat
+jq
+tree
+fzf
+zoxide
+starship
+
+# Development
+base-devel
+python
+python-pip
+nodejs
+npm
+
+# Utilities
+unzip
+zip

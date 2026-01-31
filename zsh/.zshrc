@@ -1,19 +1,35 @@
+# Universal paths
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/opt/libpq/bin:$PATH
-export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
 
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+# macOS-specific paths (Homebrew)
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    export PATH=/opt/homebrew/bin:$PATH
+    export PATH=/opt/homebrew/opt/libpq/bin:$PATH
+    # Detect available OpenJDK version
+    if [[ -d /opt/homebrew/opt/openjdk@11 ]]; then
+        export PATH=/opt/homebrew/opt/openjdk@11/bin:$PATH
+        export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
+    elif [[ -d /opt/homebrew/opt/openjdk@17 ]]; then
+        export PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
+        export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+    fi
+fi
+
+# Alias bat to batcat on Debian/Ubuntu (package name conflict)
+if [[ -f /usr/bin/batcat ]] && ! command -v bat &>/dev/null; then
+    alias bat="batcat"
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-source ~/.env
-source ~/.bash_profile
+# Source env files if they exist
+[ -f ~/.env ] && source ~/.env
+[ -f ~/.bash_profile ] && source ~/.bash_profile
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
@@ -35,7 +51,6 @@ plugins=(
     gitignore
     kubectl
     pre-commit
-    ripgrep
     tmux
     web-search
     zsh-autosuggestions
@@ -44,12 +59,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
+# Preferred editor
+export EDITOR='nvim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
@@ -79,8 +90,11 @@ git_cleanup() {
     git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d
 }
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+# macOS-specific completions
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    autoload -U +X bashcompinit && bashcompinit
+    [ -f /opt/homebrew/bin/terraform ] && complete -o nospace -C /opt/homebrew/bin/terraform terraform
+fi
 
 eval "$(starship init zsh)"
 
@@ -88,7 +102,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if command -v pyenv-virtualenv-init &>/dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # better cd command
 eval "$(zoxide init zsh)"

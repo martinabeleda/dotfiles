@@ -1,0 +1,25 @@
+# Core tools
+zsh
+git
+curl
+wget
+htop
+tmux
+neovim
+ripgrep
+bat
+jq
+tree
+fzf
+
+# Development
+build-essential
+python3
+python3-pip
+python3-venv
+nodejs
+npm
+
+# Utilities
+unzip
+zip
