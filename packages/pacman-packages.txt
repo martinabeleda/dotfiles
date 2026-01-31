@@ -20,7 +20,6 @@ python
 python-pip
 nodejs
 npm
-rustup
 
 # Utilities
 unzip
