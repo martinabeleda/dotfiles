@@ -65,28 +65,6 @@ Packer manages neovim plugins. To set everything up, run packer sync:
 :PackerSync
 ```
 
-### :robot: copilot
-
-Copilot requires Node.js as a pre-requisite. I've installed this [here](https://nodejs.org/en/download)
-
-After that, you can run the setup from neovim:
-
-```
-:Copilot setup
-```
-
-After that you can find help by:
-
-```
-:help copilot
-```
-
-Check copilot status:
-
-```
-:Copilot setup
-```
-
 ### Links
 
 - [Rust nvim guide](https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
