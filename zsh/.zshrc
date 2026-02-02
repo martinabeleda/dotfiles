@@ -62,6 +62,8 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor
 export EDITOR='nvim'
 
+ssh-add --apple-use-keychain
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
 alias vim="nvim"
