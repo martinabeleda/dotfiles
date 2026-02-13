@@ -66,23 +66,7 @@ ssh-add --apple-use-keychain
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
-alias vim="nvim"
 alias lh="ls -alh"
-
-# Aliases for project folders
-export DEVELOPMENT="$HOME/Development"
-export MARTINABELEDA="$DEVELOPMENT/martinabeleda"
-alias cstrava="cd $MARTINABELEDA/strava/ && poetry shell"
-alias cathena="cd $MARTINABELEDA/athena/"
-alias caoc="cd $MARTINABELEDA/advent-of-code/"
-alias cdot="cd $MARTINABELEDA/dotfiles/"
-
-# Aliases for tmux sessions
-alias default="tmux attach -t default"
-
-alias fm="frogmouth"
-
-alias maelstrom=$MARTINABELEDA/nautilus/maelstrom/maelstrom
 
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
