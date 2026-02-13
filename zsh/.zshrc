@@ -29,7 +29,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Source env files if they exist
 [ -f ~/.env ] && source ~/.env
-[ -f ~/.bash_profile ] && source ~/.bash_profile
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
@@ -62,7 +61,10 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor
 export EDITOR='nvim'
 
-ssh-add --apple-use-keychain
+# macOS keychain SSH integration
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    ssh-add --apple-use-keychain 2>/dev/null
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
