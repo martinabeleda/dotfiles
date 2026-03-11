@@ -24,3 +24,4 @@ npm
 # Utilities
 unzip
 zip
+liquidctl
