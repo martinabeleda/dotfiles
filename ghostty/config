@@ -1,5 +1,8 @@
 # Ghostty Configuration
 
+# Use zsh
+command = /usr/bin/zsh
+
 # Rose Pine Theme
 theme = Rose Pine
 
