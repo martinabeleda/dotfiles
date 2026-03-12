@@ -82,6 +82,8 @@ git_cleanup() {
 if [[ "$(uname -s)" == "Darwin" ]]; then
     autoload -U +X bashcompinit && bashcompinit
     [ -f /opt/homebrew/bin/terraform ] && complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
 
 eval "$(starship init zsh)"
