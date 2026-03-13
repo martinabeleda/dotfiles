@@ -1,0 +1,6 @@
+model = "gpt-5.4"
+[projects."/home/mabeleda/Development/dotfiles"]
+trust_level = "trusted"
+
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"

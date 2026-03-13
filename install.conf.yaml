@@ -15,6 +15,9 @@
     - [touch ~/.bash_profile, Creating .bash_profile file if it doesn't exist]
 
 - link:
+    ~/.codex/config.toml: .codex/config.toml
+    ~/.codex/rules: .codex/rules
+    ~/.codex/skills: .codex/skills
     ~/.config/nvim: nvim
     ~/.config/ghostty/config: ghostty/config
     ~/.config/hypr: hypr
