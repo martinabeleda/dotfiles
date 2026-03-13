@@ -69,6 +69,7 @@ fi
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias v="nvim"
 alias lh="ls -alh"
+alias rd="ripdiff"
 
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
