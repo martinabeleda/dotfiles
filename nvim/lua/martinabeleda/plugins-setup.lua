@@ -55,9 +55,6 @@ return packer.startup(function(use)
 	-- statusline
 	use("nvim-lualine/lualine.nvim")
 
-	-- precognition - assists with discovering motions
-	use("tris203/precognition.nvim")
-
 	-- edit Jupyter notebooks directly in Neovim
 	use("meatballs/notebook.nvim")
 
