@@ -24,13 +24,13 @@ Install homebrew:
 We use brew bundle to manage homebrew dependencies in a reproducible way. To install all dependencies:
 
 ```shell
-brew bundle --file=brew/Brewfile
+brew bundle --file=packages/Brewfile
 ```
 
 To dump a `Brewfile` of current entries:
 
 ```shell
-rm brew/Brewfile && brew bundle dump --file=brew/Brewfile
+rm packages/Brewfile && brew bundle dump --file=packages/Brewfile
 ```
 
 See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
@@ -40,10 +40,45 @@ See more `brew bundle` tips [here](https://gist.github.com/ChristopherA/a5792745
 Link all dotfiles and install plugins:
 
 ```shell
-./install
+bash install
 ```
 
 This is managed by [dotbot](https://github.com/anishathalye/dotbot)
+
+Preview what Dotbot would change without modifying links:
+
+```shell
+bash install --dry-run
+```
+
+When installing on an existing system, `bash install` now moves conflicting managed files into `~/.dotfiles-backups/<timestamp>/` before linking. To skip that behavior:
+
+```shell
+bash install --no-backup
+```
+
+To update the Dotbot submodule to the latest upstream `master` commit:
+
+```shell
+git -C dotbot fetch origin master
+git -C dotbot checkout origin/master
+git add dotbot
+git commit -m "Update dotbot"
+```
+
+If you are cloning this repo for the first time and want to initialize the submodule:
+
+```shell
+git submodule update --init --recursive
+```
+
+Install the git hook checks locally with:
+
+```shell
+pre-commit install
+```
+
+The configured hooks run `bash -n` on local shell scripts and `bash install --dry-run` on every commit.
 
 ### :hammer: zsh
 

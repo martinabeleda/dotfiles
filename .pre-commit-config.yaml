@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: bash-n
+        name: bash -n
+        entry: bash -n
+        language: system
+        files: ^(install|scripts/.*\.sh)$
+      - id: dotfiles-install-dry-run
+        name: dotfiles install dry run
+        entry: ./install --dry-run
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -9,10 +9,16 @@ source "$BASEDIR/scripts/detect-os.sh"
 
 # Parse arguments - separate our flags from dotbot flags
 install_pkgs=false
+backup_existing=true
+dry_run=false
 dotbot_args=()
 for arg in "$@"; do
     if [[ "$arg" == "--packages" || "$arg" == "-p" ]]; then
         install_pkgs=true
+    elif [[ "$arg" == "--dry-run" ]]; then
+        dry_run=true
+    elif [[ "$arg" == "--no-backup" ]]; then
+        backup_existing=false
     else
         dotbot_args+=("$arg")
     fi
@@ -23,16 +29,152 @@ echo "Dotfiles Installation"
 echo "=========================================="
 echo "Detected OS: $DOTFILES_OS"
 echo "Hostname: $DOTFILES_HOSTNAME"
+echo "Dry run: $dry_run"
+echo "Backup existing files: $backup_existing"
 echo "=========================================="
+
+backup_root="${HOME}/.dotfiles-backups"
+backup_stamp="$(date +%Y%m%d-%H%M%S)"
+backup_dir="${backup_root}/${backup_stamp}"
+backup_created=false
+
+ensure_backup_dir() {
+    if [[ "$backup_created" == false ]]; then
+        mkdir -p "$backup_dir"
+        backup_created=true
+        echo "Backing up replaced files to: $backup_dir"
+    fi
+}
+
+classify_target() {
+    local target="$1"
+    local source_rel="$2"
+    local source_abs="${BASEDIR}/${source_rel}"
+
+    if [[ ! -e "$target" && ! -L "$target" ]]; then
+        echo "missing"
+        return
+    fi
+
+    if [[ -L "$target" ]]; then
+        local target_dir target_dest target_abs
+        target_dir="$(cd "$(dirname "$target")" && pwd -P)"
+        target_dest="$(readlink "$target")"
+
+        if [[ "$target_dest" = /* ]]; then
+            target_abs="$target_dest"
+        else
+            target_abs="$(cd "$target_dir" && cd "$(dirname "$target_dest")" && pwd -P)/$(basename "$target_dest")"
+        fi
+
+        if [[ "$target_abs" == "$source_abs" ]]; then
+            echo "managed"
+            return
+        fi
+    fi
+
+    echo "conflict"
+}
+
+move_conflicting_target() {
+    local target="$1"
+    local source_rel="$2"
+    local status
+
+    status="$(classify_target "$target" "$source_rel")"
+    if [[ "$status" != "conflict" ]]; then
+        return
+    fi
+
+    ensure_backup_dir
+    local backup_target="${backup_dir}/${target#"$HOME"/}"
+    mkdir -p "$(dirname "$backup_target")"
+    mv "$target" "$backup_target"
+    echo "Moved existing target to backup: $target -> $backup_target"
+}
 
 # Run dotbot for symlinks
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
+managed_targets=(
+    "${HOME}/.config/nvim"
+    "${HOME}/.config/ghostty/config"
+    "${HOME}/.config/hypr"
+    "${HOME}/.zshrc"
+    "${HOME}/.zprofile"
+    "${HOME}/.gitconfig"
+    "${HOME}/.config/starship.toml"
+    "${HOME}/.tmux.conf"
+)
+managed_sources=(
+    "nvim"
+    "ghostty/config"
+    "hypr"
+    "zsh/.zshrc"
+    "zsh/.zprofile"
+    ".gitconfig"
+    "starship.toml"
+    "tmux/.tmux.conf"
+)
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
+
+if [[ "$backup_existing" == true ]]; then
+    if [[ "$dry_run" == true ]]; then
+        echo "Dry run summary:"
+        for i in "${!managed_targets[@]}"; do
+            target="${managed_targets[$i]}"
+            source="${managed_sources[$i]}"
+            status="$(classify_target "$target" "$source")"
+            case "$status" in
+                missing)
+                    echo "  create link: $target -> ${BASEDIR}/${source}"
+                    ;;
+                managed)
+                    echo "  keep link:   $target"
+                    ;;
+                conflict)
+                    echo "  backup and relink: $target -> ${backup_dir}/${target#"$HOME"/}"
+                    ;;
+            esac
+        done
+        echo "  shell actions: install/update Oh My Zsh, zsh plugins, and tmux TPM if needed"
+        if [[ "$install_pkgs" == true ]]; then
+            echo "  package actions: would run optional package installation"
+        fi
+        exit 0
+    fi
+
+    for i in "${!managed_targets[@]}"; do
+        move_conflicting_target "${managed_targets[$i]}" "${managed_sources[$i]}"
+    done
+elif [[ "$dry_run" == true ]]; then
+    echo "Dry run summary:"
+    for i in "${!managed_targets[@]}"; do
+        target="${managed_targets[$i]}"
+        source="${managed_sources[$i]}"
+        status="$(classify_target "$target" "$source")"
+        case "$status" in
+            missing)
+                echo "  create link: $target -> ${BASEDIR}/${source}"
+                ;;
+            managed)
+                echo "  keep link:   $target"
+                ;;
+            conflict)
+                echo "  conflict would remain without backups: $target"
+                ;;
+        esac
+    done
+    echo "  shell actions: install/update Oh My Zsh, zsh plugins, and tmux TPM if needed"
+    if [[ "$install_pkgs" == true ]]; then
+        echo "  package actions: would run optional package installation"
+    fi
+    exit 0
+fi
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${dotbot_args[@]}"
 
