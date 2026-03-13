@@ -1,6 +1,13 @@
 repos:
   - repo: local
     hooks:
+      - id: check-yaml
+        name: check yaml
+        entry: python -c 'import sys, yaml; [yaml.safe_load(open(path).read()) for path in sys.argv[1:]]'
+        language: python
+        additional_dependencies:
+          - pyyaml
+        files: \.(yaml|yml)$
       - id: bash-n
         name: bash -n
         entry: bash -n

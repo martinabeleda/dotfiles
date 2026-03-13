@@ -118,10 +118,6 @@ managed_sources=(
     "tmux/.tmux.conf"
 )
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
-
 if [[ "$backup_existing" == true ]]; then
     if [[ "$dry_run" == true ]]; then
         echo "Dry run summary:"
@@ -175,6 +171,10 @@ elif [[ "$dry_run" == true ]]; then
     fi
     exit 0
 fi
+
+cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${dotbot_args[@]}"
 

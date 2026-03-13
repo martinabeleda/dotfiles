@@ -78,7 +78,7 @@ Install the git hook checks locally with:
 pre-commit install
 ```
 
-The configured hooks run `bash -n` on local shell scripts and `bash install --dry-run` on every commit.
+The configured hooks run YAML validation, `bash -n` on local shell scripts, and `bash install --dry-run` on every commit.
 
 ### :hammer: zsh
 
