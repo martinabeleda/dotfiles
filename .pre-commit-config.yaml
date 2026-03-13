@@ -1,0 +1,21 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-yaml
+        name: check yaml
+        entry: python -c 'import sys, yaml; [yaml.safe_load(open(path).read()) for path in sys.argv[1:]]'
+        language: python
+        additional_dependencies:
+          - pyyaml
+        files: \.(yaml|yml)$
+      - id: bash-n
+        name: bash -n
+        entry: bash -n
+        language: system
+        files: ^(install|scripts/.*\.sh)$
+      - id: dotfiles-install-dry-run
+        name: dotfiles install dry run
+        entry: ./install --dry-run
+        language: system
+        pass_filenames: false
+        always_run: true

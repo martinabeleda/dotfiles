@@ -7,12 +7,10 @@
 - clean: ["~"]
 
 - shell:
-    - [rm -rf ~/.oh-my-zsh, Removing existing Oh My Zsh installation]
     - [
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
-        Installing Oh My Zsh,
+        'if [ -d ~/.oh-my-zsh ]; then echo "Oh My Zsh already installed"; else RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; fi && if [ -e ~/.zshrc ] && [ ! -L ~/.zshrc ]; then mkdir -p ~/.dotfiles-backups/generated && mv ~/.zshrc ~/.dotfiles-backups/generated/zshrc.oh-my-zsh; fi',
+        Installing Oh My Zsh if missing,
       ]
-    - [rm -f ~/.zshrc, Removing existing .zshrc created by Oh My Zsh]
     - [touch ~/.env, Creating .env file if it doesn't exist]
     - [touch ~/.bash_profile, Creating .bash_profile file if it doesn't exist]
 
@@ -31,15 +29,14 @@
 
 - shell:
     - [
-        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions,
-        Installing zsh plugins,
+        'mkdir -p ~/.oh-my-zsh/custom/plugins && if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.git ]; then git -C ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull --ff-only; else git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions; fi',
+        Installing or updating zsh-autosuggestions,
       ]
     - [
-        git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab,
-        Installing fzf-tab plugin,
+        'mkdir -p ~/.oh-my-zsh/custom/plugins && if [ -d ~/.oh-my-zsh/custom/plugins/fzf-tab/.git ]; then git -C ~/.oh-my-zsh/custom/plugins/fzf-tab pull --ff-only; else git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab; fi',
+        Installing or updating fzf-tab plugin,
       ]
-    - [rm -rf ~/.tmux/plugins/tpm, Removing existing tmux plugin manager]
     - [
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm,
-        Installing tmux plugin manager,
+        'mkdir -p ~/.tmux/plugins && if [ -d ~/.tmux/plugins/tpm/.git ]; then git -C ~/.tmux/plugins/tpm pull --ff-only; else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi',
+        Installing or updating tmux plugin manager,
       ]
