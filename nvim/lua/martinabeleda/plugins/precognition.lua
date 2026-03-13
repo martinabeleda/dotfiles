@@ -1,3 +1,3 @@
 require("precognition").setup({
-	enable = true,
+	enable = false,
 })
