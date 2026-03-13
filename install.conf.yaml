@@ -8,7 +8,7 @@
 
 - shell:
     - [
-        'if [ -d ~/.oh-my-zsh ]; then echo "Oh My Zsh already installed"; else RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; fi',
+        'if [ -d ~/.oh-my-zsh ]; then echo "Oh My Zsh already installed"; else RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; fi && if [ -e ~/.zshrc ] && [ ! -L ~/.zshrc ]; then mkdir -p ~/.dotfiles-backups/generated && mv ~/.zshrc ~/.dotfiles-backups/generated/zshrc.oh-my-zsh; fi',
         Installing Oh My Zsh if missing,
       ]
     - [touch ~/.env, Creating .env file if it doesn't exist]
