@@ -17,7 +17,6 @@ null_ls.setup({
 	sources = {
 		--  to disable file types use
 		--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
-		formatting.rustfmt,
 		formatting.prettier,
 		formatting.stylua,
 		formatting.clang_format,
@@ -37,6 +36,10 @@ null_ls.setup({
 							-- Use Ruff for Python formatting and none-ls for other languages.
 							if filetype == "python" then
 								return client.name == "ruff"
+							end
+
+							if filetype == "rust" then
+								return client.name == "rust_analyzer"
 							end
 
 							return client.name == "null-ls"

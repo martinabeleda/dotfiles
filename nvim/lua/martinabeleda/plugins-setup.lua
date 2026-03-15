@@ -75,8 +75,6 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- easily configure language servers
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
-	use("simrat39/rust-tools.nvim")
-
 	-- autocompletion
 	use("hrsh7th/nvim-cmp") -- completion plugin
 

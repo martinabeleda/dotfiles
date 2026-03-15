@@ -1,18 +1,6 @@
--- import lspconfig plugin safely
-local lspconfig_status, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status then
-	return
-end
-
 -- import cmp-nvim-lsp plugin safely
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
-	return
-end
-
--- import rust tools plugin safely
-local rt_setup, rust_tools = pcall(require, "rust-tools")
-if not rt_setup then
 	return
 end
 
@@ -43,6 +31,10 @@ local on_attach = function(client, bufnr)
 		keymap.set("n", "<leader>rf", ":lua vim.lsp.buf.rename()<CR>", opts) -- rename symbol
 	end
 
+	if client.name == "rust_analyzer" then
+		keymap.set("n", "<Leader>a", vim.lsp.buf.code_action, opts)
+	end
+
 	-- Prefer ty for Python language intelligence.
 	if client.name == "ruff" then
 		client.server_capabilities.hoverProvider = false
@@ -65,31 +57,15 @@ end
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- configure typescript server
-lspconfig["ts_ls"].setup({
+vim.lsp.config("ts_ls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+vim.lsp.enable("ts_ls")
 
--- configure rust tools
-rust_tools.setup({
-	server = {
-		on_attach = function(_, bufnr)
-			-- Hover actions
-			vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-			-- Code action groups
-			vim.keymap.set("n", "<Leader>a", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
-		end,
-	},
-	inlay_hints = {
-		only_current_line = true,
-		show_parameter_hints = true,
-		parameter_hints_prefix = "<- ",
-		other_hints_prefix = "=> ",
-	},
-})
-
-lspconfig["rust_analyzer"].setup({
+vim.lsp.config("rust_analyzer", {
+	capabilities = capabilities,
+	on_attach = on_attach,
 	settings = {
 		["rust-analyzer"] = {
 			cargo = {
@@ -98,14 +74,20 @@ lspconfig["rust_analyzer"].setup({
 		},
 	},
 })
+vim.lsp.enable("rust_analyzer")
 
 -- configure python servers
-lspconfig["ruff"].setup({
+vim.lsp.config("ruff", {
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+vim.lsp.enable("ruff")
 
-lspconfig["ty"].setup({
+vim.lsp.config("ty", {
+	cmd = { "ty", "server" },
+	filetypes = { "python" },
+	root_markers = { "pyproject.toml", "ty.toml", ".git" },
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+vim.lsp.enable("ty")
