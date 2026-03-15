@@ -17,6 +17,7 @@ if not rt_setup then
 end
 
 local keymap = vim.keymap -- for conciseness
+local python_format_augroup = vim.api.nvim_create_augroup("LspPythonFormatting", {})
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
@@ -40,6 +41,24 @@ local on_attach = function(client, bufnr)
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "ts_ls" then
 		keymap.set("n", "<leader>rf", ":lua vim.lsp.buf.rename()<CR>", opts) -- rename symbol
+	end
+
+	-- Prefer ty for Python language intelligence.
+	if client.name == "ruff" then
+		client.server_capabilities.hoverProvider = false
+		vim.api.nvim_clear_autocmds({ group = python_format_augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = python_format_augroup,
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({
+					filter = function(format_client)
+						return format_client.name == "ruff"
+					end,
+					bufnr = bufnr,
+				})
+			end,
+		})
 	end
 end
 
@@ -80,8 +99,13 @@ lspconfig["rust_analyzer"].setup({
 	},
 })
 
--- configure python server
-lspconfig["pyright"].setup({
+-- configure python servers
+lspconfig["ruff"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+lspconfig["ty"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })

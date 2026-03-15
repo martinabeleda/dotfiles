@@ -20,7 +20,6 @@ null_ls.setup({
 		formatting.rustfmt,
 		formatting.prettier,
 		formatting.stylua,
-		formatting.black,
 		formatting.clang_format,
 	},
 	-- configure format on save
@@ -31,9 +30,15 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
+					local filetype = vim.bo[bufnr].filetype
+
 					vim.lsp.buf.format({
 						filter = function(client)
-							--  only use null-ls for formatting instead of lsp server
+							-- Use Ruff for Python formatting and none-ls for other languages.
+							if filetype == "python" then
+								return client.name == "ruff"
+							end
+
 							return client.name == "null-ls"
 						end,
 						bufnr = bufnr,
