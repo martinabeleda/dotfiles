@@ -24,7 +24,7 @@
     ~/.gitconfig: .gitconfig
     ~/.config/starship.toml: starship.toml
     ~/.tmux.conf: tmux/.tmux.conf
-    ~/.pi/agents/models.json: pi/agents/models.json
+    ~/.pi/agent/models.json: pi/agent/models.json
 
 - shell:
     - [
