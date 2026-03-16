@@ -26,3 +26,7 @@ unzip
 zip
 liquidctl
 difftastic
+
+# AI / LLM
+ollama-cuda
+opencode

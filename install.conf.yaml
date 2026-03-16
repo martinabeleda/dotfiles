@@ -18,6 +18,7 @@
     ~/.codex/config.toml: .codex/config.toml
     ~/.codex/rules: .codex/rules
     ~/.codex/skills: .codex/skills
+    ~/.config/opencode/opencode.json: .config/opencode/opencode.json
     ~/.config/nvim: nvim
     ~/.config/ghostty/config: ghostty/config
     ~/.config/hypr: hypr
