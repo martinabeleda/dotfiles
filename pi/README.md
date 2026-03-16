@@ -76,3 +76,20 @@ sudo tailscale serve -bg 8081
 tailscale serve status
 ```
 
+This verifies that:
+
+- Tailscale is terminating HTTPS for the tailnet URL
+- requests to `/` are being proxied to the local service on `127.0.0.1:8081`
+- manually generated `tailscale cert` certificate files are not needed when using `tailscale serve`
+
+**Verify the tailnet URL works:**
+
+```bash
+curl https://archlinux.trout-hadar.ts.net/v1/models
+```
+
+**Optional: check which process is listening on port 8081:**
+
+```bash
+ss -ltnp | grep ':8081'
+```
