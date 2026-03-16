@@ -115,18 +115,4 @@ See the [starship docs](https://starship.rs/guide/#%F0%9F%9A%80-installation) fo
 1. Add new plugin to `.tmux.conf` with `set -g @plugin '...'`
 1. Press `prefix` + `I` to fetch the plugin.
 
-## Local LLM (Ollama)
 
-After installing packages and linking dotfiles, enable and start Ollama:
-
-```shell
-sudo systemctl enable --now ollama.service
-```
-
-Pull the Qwen 3.5 9B model (~6.6GB, Q4_K_M quantization):
-
-```shell
-ollama pull qwen3.5:9b
-```
-
-Use the local model in OpenCode by selecting `qwen3.5:9b` as the model.

@@ -1,0 +1,15 @@
+[Unit]
+Description=llama-server (Qwen3.5-9B)
+After=network.target
+
+[Service]
+Type=simple
+User=mabeleda
+WorkingDirectory=/home/mabeleda
+ExecStart=/usr/bin/llama-server -hf unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL --jinja --port 8081 --flash-attn 'on' --bind 0.0.0.0
+Restart=always
+RestartSec=10
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target
