@@ -20,6 +20,16 @@ sudo systemctl enable llama-server
 sudo systemctl start llama-server
 ```
 
+You can test the server by calling:
+
+```bash
+# From the host
+curl http://localhost:8081/v1/models
+
+# From any machine on the tailnet
+curl http://archlinux:8081/v1/models
+```
+
 ### 3. Manage the service
 
 **Check status:**
@@ -51,3 +61,18 @@ sudo systemctl restart llama-server
 ```bash
 sudo journalctl -u llama-server --no-pager
 ```
+
+### 4. Set up tailscale serve
+
+**Create a tailnet-wide service** using [tailscale serve](https://tailscale.com/docs/features/tailscale-serve)
+
+```bash
+sudo tailscale serve -bg 8081
+```
+
+**Check status:**
+
+```bash
+tailscale serve status
+```
+

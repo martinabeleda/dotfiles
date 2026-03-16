@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=mabeleda
 WorkingDirectory=/home/mabeleda
-ExecStart=/usr/bin/llama-server -hf unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL --jinja --port 8081 --flash-attn 'on' --bind 0.0.0.0
+ExecStart=/usr/bin/llama-server -hf unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL --jinja --host 0.0.0.0 --port 8081 --flash-attn on
 Restart=always
 RestartSec=10
 Environment="PATH=/usr/local/bin:/usr/bin:/bin"

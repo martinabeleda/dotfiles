@@ -15,7 +15,7 @@
       }
     },
     "llama-cpp": {
-      "baseUrl": "http://archlinux:8081/v1",
+      "baseUrl": "https://archlinux.trout-hadar.ts.net/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
