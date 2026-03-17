@@ -20,6 +20,7 @@
     ~/.codex/config.toml: .codex/config.toml
     ~/.codex/rules: .codex/rules
     ~/.codex/skills: .codex/skills
+    ~/.pi: pi
     ~/.config/nvim: nvim
     ~/.config/ghostty/config: ghostty/config
     ~/.config/hypr: hypr
