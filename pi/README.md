@@ -2,6 +2,18 @@
 
 Configuration files and scripts for my Pi setup.
 
+## Install `pi` agent
+
+```bash
+npm i @mariozechner/pi-coding-agent
+```
+
+To update:
+
+```bash
+npm install -g @mariozechner/pi-coding-agent
+```
+
 ## Llama Server
 
 Run the [Qwen3.5-9B](https://huggingface.co/unsloth/Qwen3.5-9B-GGUF) model with llama-server using systemd (always on, auto-restart):
