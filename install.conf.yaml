@@ -15,7 +15,6 @@
     - [touch ~/.bash_profile, Creating .bash_profile file if it doesn't exist]
 
 - link:
-    ~/.config/opencode/opencode.json: .config/opencode/opencode.json
     ~/.config/nvim: nvim
     ~/.config/ghostty/config: ghostty/config
     ~/.config/hypr: hypr
