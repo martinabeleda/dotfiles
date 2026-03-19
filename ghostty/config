@@ -1,14 +1,13 @@
 # Ghostty Configuration
 
-# Use zsh
-command = /usr/bin/zsh
+# Platform-specific overrides (command, font-size)
+config-file = config.local
 
 # Rose Pine Theme
 theme = Rose Pine
 
 # Font
 font-family = JetBrains Mono Nerd Font
-font-size = 12
 
 # Window
 window-theme = ghostty

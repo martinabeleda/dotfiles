@@ -1,0 +1,3 @@
+# Linux-specific Ghostty configuration
+command = /usr/bin/zsh
+font-size = 12
