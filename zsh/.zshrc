@@ -67,6 +67,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
+alias k="kubectl"
 alias v="nvim"
 alias lh="ls -alh"
 alias rd="ripdiff"
@@ -101,3 +102,7 @@ eval "$(zoxide init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Added by flyctl installer
+export FLYCTL_INSTALL="/home/mabeleda/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
