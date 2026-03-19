@@ -6,6 +6,11 @@
     editor = vim
 
 [alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+
     gpf = git push --force origin HEAD
 
     # `git log` with patches shown with difftastic.
