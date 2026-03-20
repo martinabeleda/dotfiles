@@ -10,6 +10,7 @@ ExecStart=/usr/bin/llama-server -hf unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL --jinja -
 Restart=always
 RestartSec=10
 Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="LLAMA_CACHE=/data/llama.cpp"
 
 [Install]
 WantedBy=multi-user.target
