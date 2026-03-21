@@ -15,7 +15,7 @@
       }
     },
     "llama-cpp": {
-      "baseUrl": "https://archlinux.trout-hadar.ts.net/v1",
+      "baseUrl": "https://llama.trout-hadar.ts.net/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
