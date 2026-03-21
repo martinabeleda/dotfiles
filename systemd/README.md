@@ -62,24 +62,10 @@ sudo journalctl -u llama-server --no-pager
 
 ### 4. Set up tailscale serve
 
-The machine must be registered with a tag to use `--service`:
-
-```bash
-sudo tailscale up --advertise-tags=tag:server
-```
-
-Ensure the `tag:server` tag is defined in your [Tailscale ACL policy](https://login.tailscale.com/admin/acls):
-
-```json
-"tagOwners": {
-    "tag:server": ["autogroup:admin"]
-}
-```
-
 **Create a tailnet-wide service** using [tailscale serve](https://tailscale.com/docs/features/tailscale-serve):
 
 ```bash
-sudo tailscale serve --service=svc:llama -bg 8081
+sudo tailscale serve -bg 8081
 ```
 
 **Check status:**
@@ -97,7 +83,7 @@ This verifies that:
 **Verify the tailnet URL works:**
 
 ```bash
-curl https://llama.trout-hadar.ts.net/v1/models
+curl https://archlinux.trout-hadar.ts.net/v1/models
 ```
 
 **Optional: check which process is listening on port 8081:**
