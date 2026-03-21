@@ -29,9 +29,6 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	-- Github Copilot
-	use({ "github/copilot.vim" })
-
 	-- Color schemes
 	use({ "rose-pine/neovim", as = "rose-pine" })
 

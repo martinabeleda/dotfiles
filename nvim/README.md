@@ -58,24 +58,7 @@ The leader key is set to **space** (`<leader>`) for all mapped commands.
 
 ---
 
-## Fuzzy Finder (Copilot)
 
-| Keybinding | Command | Description |
-|------------|---------|-------------|
-| `<leader>cco` | `CopilotChatOpen` | Open Copilot Chat |
-| `<leader>ccr` | `CopilotChatReset` | Reset Copilot Chat |
-| `<leader>ccs` | `CopilotChatStop` | Stop Copilot Chat |
-| `<leader>cce` | `CopilotChatExplain` | Explain code |
-| `<leader>ccrv` | `CopilotChatReview` | Review code |
-| `<leader>ccf` | `CopilotChatFix` | Fix code |
-| `<leader>ccop` | `CopilotChatOptimize` | Optimize code |
-| `<leader>ccd` | `CopilotChatDocs` | Document code |
-| `<leader>cct` | `CopilotChatTests` | Generate tests |
-| `<leader>ccfd` | `CopilotChatFixDiagnostic` | Fix diagnostics |
-| `<leader>ccc` | `CopilotChatCommit` | Commit changes |
-| `<leader>cccs` | `CopilotChatCommitStaged` | Commit staged changes |
-
----
 
 ## Useful Commands
 
@@ -148,7 +131,6 @@ The leader key is set to **space** (`<leader>`) for all mapped commands.
 | **nvim-tree** | File explorer |
 | **mason.nvim** | LSP server & formatter installer |
 | **lspsaga.nvim** | Enhanced LSP UI |
-| **Copilot** | GitHub Copilot integration |
 | **Comment.nvim** | Multi-line commenting |
 | **nvim-cmp** | Autocompletion |
 | **gitsigns.nvim** | Git diff visualization |
