@@ -106,3 +106,6 @@ export NVM_DIR="$HOME/.nvm"
 # Added by flyctl installer
 export FLYCTL_INSTALL="/home/mabeleda/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+autoload -U compinit; compinit
+compdef _flyctl fly
+source <(flyctl completion zsh)

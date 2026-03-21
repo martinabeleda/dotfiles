@@ -20,6 +20,10 @@ telescope.setup({
 			},
 		},
 	},
+	-- set default grep binary to ripgrep for faster searching
+	grep = {
+		grep = "rg",
+	},
 })
 
 telescope.load_extension("fzf")
