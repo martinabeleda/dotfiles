@@ -111,6 +111,7 @@ autoload -U compinit; compinit
 compdef _flyctl fly
 source <(flyctl completion zsh)
 
+
 # >>> grok installer >>>
 export PATH="$HOME/.grok/bin:$PATH"
 fpath=(~/.grok/completions/zsh $fpath)
