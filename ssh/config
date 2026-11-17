@@ -1,0 +1,7 @@
+# No secrets in this file: keys live in ~/.ssh and are never committed.
+
+Host ugreen-nas
+  HostName ugreen-nas
+  User mabeleda
+  IdentityFile ~/.ssh/nas_backup
+  IdentitiesOnly yes

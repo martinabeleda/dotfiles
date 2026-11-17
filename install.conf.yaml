@@ -30,6 +30,10 @@
     ~/.config/starship.toml: starship.toml
     ~/.tmux.conf: tmux/.tmux.conf
     ~/.pi/agent/models.json: pi/agent/models.json
+    ~/.ssh/config: ssh/config
+    ~/.local/bin/hf-backup: bin/hf-backup
+    ~/.config/systemd/user/hf-backup.service: systemd/user/hf-backup.service
+    ~/.config/systemd/user/hf-backup.timer: systemd/user/hf-backup.timer
 
 - shell:
     - [

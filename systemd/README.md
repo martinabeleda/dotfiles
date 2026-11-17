@@ -91,3 +91,94 @@ curl https://archlinux.trout-hadar.ts.net/v1/models
 ```bash
 ss -ltnp | grep ':8081'
 ```
+
+## Hugging Face Hub Backup
+
+Daily rsync of `~/.cache/huggingface/hub/` to the `ugreen-nas` NAS over Tailscale, run by a systemd **user** timer.
+
+| Repo file | Linked to |
+| --- | --- |
+| `bin/hf-backup` | `~/.local/bin/hf-backup` |
+| `systemd/user/hf-backup.service` | `~/.config/systemd/user/hf-backup.service` |
+| `systemd/user/hf-backup.timer` | `~/.config/systemd/user/hf-backup.timer` |
+| `ssh/config` | `~/.ssh/config` |
+
+Destination on the NAS: `/volume1/Backups/huggingface-hub`.
+
+### How it behaves
+
+- Runs once a day, at a random time between 00:00 and 00:30 (`RandomizedDelaySec=30m`). If the machine was off, `Persistent=true` runs it at the next boot.
+- Only new or changed files are sent. HF blobs are immutable and named by hash, so daily runs only copy newly downloaded models.
+- No `--delete`: models removed locally stay on the NAS. Prune the NAS copy by hand if needed.
+- Exits cleanly (skips) if the NAS is unreachable or the HF cache doesn't exist.
+
+### 1. One-time setup
+
+Create a dedicated, passphrase-less key and install it on the NAS (keys are **never** committed; `.gitignore` only allows `ssh/config`):
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/nas_backup -N "" -C "hf-backup"
+ssh-copy-id -i ~/.ssh/nas_backup.pub mabeleda@ugreen-nas
+```
+
+On the NAS (UGOS web UI):
+
+- Control Panel → Terminal → enable **SSH**
+- Control Panel → File Services → enable the **rsync** service and grant `mabeleda` access to the `Backups` share
+
+> UGOS ships a patched rsync: it refuses transfers unless the rsync service is enabled, and only accepts
+> share-relative paths (`Backups/huggingface-hub/`), not `/volume1/...`.
+
+Link the files (`bash install`, or just these links), then enable the timer:
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now hf-backup.timer
+loginctl enable-linger "$USER"   # run even when not logged in
+```
+
+### 2. Trigger a backup manually
+
+Through systemd (same environment as the scheduled run, logs go to the journal):
+
+```bash
+systemctl --user start hf-backup.service
+journalctl --user -u hf-backup -f
+```
+
+Or run the script directly in the terminal to see rsync's output:
+
+```bash
+hf-backup
+```
+
+Preview what would be transferred without copying anything:
+
+```bash
+rsync -a --dry-run -v --exclude '.locks/' --exclude '*.incomplete' \
+  ~/.cache/huggingface/hub/ ugreen-nas:Backups/huggingface-hub/
+```
+
+### 3. Check status
+
+```bash
+systemctl --user list-timers hf-backup.timer   # next / last run
+systemctl --user status hf-backup.service      # result of the last run
+journalctl --user -u hf-backup --no-pager -n 50
+ssh ugreen-nas 'du -sh /volume1/Backups/huggingface-hub'
+```
+
+### 4. Restore
+
+```bash
+rsync -a --partial ugreen-nas:Backups/huggingface-hub/ ~/.cache/huggingface/hub/
+```
+
+### 5. Change the schedule
+
+Edit `OnCalendar` in `systemd/user/hf-backup.timer` (e.g. `*-*-* 03:00`, `weekly`, `*-*-* 00/6:00`), then:
+
+```bash
+systemctl --user daemon-reload
+systemctl --user restart hf-backup.timer
+```
