@@ -12,7 +12,7 @@ repos:
         name: bash -n
         entry: bash -n
         language: system
-        files: ^(install|scripts/.*\.sh)$
+        files: ^(install|scripts/.*\.sh|bin/.*)$
       - id: dotfiles-install-dry-run
         name: dotfiles install dry run
         entry: ./install --dry-run
