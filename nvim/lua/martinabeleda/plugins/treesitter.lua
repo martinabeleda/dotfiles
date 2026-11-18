@@ -30,6 +30,8 @@ treesitter.setup({
 		"vim",
 		"dockerfile",
 		"gitignore",
+		"hcl",
+		"terraform",
 	},
 	-- auto install above language parsers
 	auto_install = true,
