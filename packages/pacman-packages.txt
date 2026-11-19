@@ -26,5 +26,3 @@ npm
 # Utilities
 unzip
 zip
-liquidctl
-difftastic
