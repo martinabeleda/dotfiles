@@ -89,16 +89,16 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
 
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
 if command -v pyenv-virtualenv-init &>/dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # better cd command
-eval "$(zoxide init zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -107,13 +107,17 @@ export NVM_DIR="$HOME/.nvm"
 # Added by flyctl installer
 export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
-autoload -U compinit; compinit
-compdef _flyctl fly
-source <(flyctl completion zsh)
+if command -v flyctl &>/dev/null; then
+    autoload -U compinit; compinit
+    source <(flyctl completion zsh)
+    compdef _flyctl fly
+fi
 
 
 # >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
+if [[ -d "$HOME/.grok" ]]; then
+    export PATH="$HOME/.grok/bin:$PATH"
+    fpath=(~/.grok/completions/zsh $fpath)
+    autoload -Uz compinit && compinit -C
+fi
 # <<< grok installer <<<

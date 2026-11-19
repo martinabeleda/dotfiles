@@ -1,0 +1,9 @@
+# pi coding agent config. Linked by every profile.
+- defaults:
+    link:
+      relink: true
+      ignore: true
+      create: true
+
+- link:
+    ~/.pi/agent/models.json: pi/agent/models.json

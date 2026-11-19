@@ -45,6 +45,24 @@ bash install
 
 This is managed by [dotbot](https://github.com/anishathalye/dotbot)
 
+#### Profiles
+
+`install` links a profile built from the layers in `conf/`:
+
+| Profile | Layers | Use for |
+|---|---|---|
+| `pi` | `pi` | Only the pi agent config |
+| `minimal` | `base` + `pi` | Machines that only need git, tmux and pi config (e.g. a NAS) |
+| `full` | `base` + `pi` + `dev` | Dev machines: adds zsh/Oh My Zsh, nvim, starship, ghostty |
+
+On [Omarchy](https://omarchy.org) (detected by `~/.local/share/omarchy`) the default is `pi`, so Omarchy's own bash, git, tmux, nvim, starship, ghostty and Hyprland config are left alone. Everywhere else the default is `full`. Pick one explicitly with:
+
+```shell
+bash install --profile minimal
+```
+
+This repo only holds machine-independent config. Host-specific things (services, systemd units, ssh `Host` entries) belong elsewhere.
+
 Preview what Dotbot would change without modifying links:
 
 ```shell
@@ -78,7 +96,7 @@ Install the git hook checks locally with:
 pre-commit install
 ```
 
-The configured hooks run YAML validation, `bash -n` on local shell scripts, and `bash install --dry-run` on every commit.
+The configured hooks run YAML validation, `bash -n` on local shell scripts, `bash install --dry-run` for every profile, and a check that no tailnet hostnames or addresses are committed.
 
 ### :hammer: zsh
 

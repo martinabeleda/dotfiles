@@ -16,4 +16,4 @@ npm install -g @mariozechner/pi-coding-agent
 
 ## Dependencies
 
-- [Llama Server (systemd service)](../systemd/README.md) — provides the local LLM backend used by the `llama-cpp` provider
+- A llama.cpp server on the tailnet provides the local LLM backend used by the `omarchy` provider in `agent/models.json`. It is not set up by this repo.

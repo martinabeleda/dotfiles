@@ -1,10 +1,11 @@
+# Full development environment: zsh + Oh My Zsh, nvim, starship, ghostty.
+# Not used on Omarchy, which ships its own shell, editor, prompt and terminal.
+# (Omarchy gets the pi profile.)
 - defaults:
     link:
       relink: true
       ignore: true
       create: true
-
-- clean: ["~"]
 
 - shell:
     - [
@@ -23,17 +24,9 @@
     ~/.config/ghostty/config: ghostty/config
     ~/.config/ghostty/config.macos: ghostty/config.macos
     ~/.config/ghostty/config.linux: ghostty/config.linux
-    ~/.config/hypr: hypr
     ~/.zshrc: zsh/.zshrc
     ~/.zprofile: zsh/.zprofile
-    ~/.gitconfig: .gitconfig
     ~/.config/starship.toml: starship.toml
-    ~/.tmux.conf: tmux/.tmux.conf
-    ~/.pi/agent/models.json: pi/agent/models.json
-    ~/.ssh/config: ssh/config
-    ~/.local/bin/hf-backup: bin/hf-backup
-    ~/.config/systemd/user/hf-backup.service: systemd/user/hf-backup.service
-    ~/.config/systemd/user/hf-backup.timer: systemd/user/hf-backup.timer
 
 - shell:
     - [
@@ -43,8 +36,4 @@
     - [
         'mkdir -p ~/.oh-my-zsh/custom/plugins && if [ -d ~/.oh-my-zsh/custom/plugins/fzf-tab/.git ]; then git -C ~/.oh-my-zsh/custom/plugins/fzf-tab pull --ff-only; else git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab; fi',
         Installing or updating fzf-tab plugin,
-      ]
-    - [
-        'mkdir -p ~/.tmux/plugins && if [ -d ~/.tmux/plugins/tpm/.git ]; then git -C ~/.tmux/plugins/tpm pull --ff-only; else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi',
-        Installing or updating tmux plugin manager,
       ]
