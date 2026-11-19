@@ -1,13 +1,15 @@
 {
   "providers": {
     "llama-cpp": {
-      "baseUrl": "https://archlinux.trout-hadar.ts.net/v1",
+      "baseUrl": "https://llama.tailad6f06.ts.net/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
         {
-          "id": "Qwen3.5-9B-GGUF",
-          "name": "Qwen 3.5 9B (Local)"
+          "id": "qwen3.8-pi",
+          "name": "Qwen 3.8 (tailnet)",
+          "contextWindow": 65536,
+          "reasoning": false
         }
       ]
     }
