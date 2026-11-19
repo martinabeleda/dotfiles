@@ -108,19 +108,7 @@ zsh
 
 ## :wrench: nvim
 
-Most of my neovim setup has been sourced from [josean](https://www.youtube.com/watch?v=vdn_pKJUda8)
-
-### :postbox: packer
-
-Packer manages neovim plugins. To set everything up, run packer sync:
-
-```shell
-:PackerSync
-```
-
-### Links
-
-- [Rust nvim guide](https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
+[LazyVim](https://www.lazyvim.org/) on lazy.nvim, matching Omarchy's out-of-the-box setup. Plugins install themselves on first launch; see [nvim/README.md](nvim/README.md) for what differs from Omarchy.
 
 ## :rocket: starship prompt
 

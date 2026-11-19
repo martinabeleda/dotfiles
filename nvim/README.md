@@ -1,155 +1,47 @@
-# Neovim Configuration Guide
+# Neovim
 
-## Leader Key
+[LazyVim](https://www.lazyvim.org/) on [lazy.nvim](https://lazy.folke.io/), set up to match what
+[Omarchy](https://omarchy.org) ships out of the box (its `omarchy-nvim` package: the LazyVim starter
+plus a small overlay), with a few personal overrides.
 
-The leader key is set to **space** (`<leader>`) for all mapped commands.
+The leader key is **space**. Press it and wait for which-key to list everything, or see the
+[LazyVim keymaps](https://www.lazyvim.org/keymaps).
 
----
+## Layout
 
-## File Navigation & Search
+| Path | What |
+|---|---|
+| `init.lua`, `lua/config/lazy.lua` | LazyVim starter bootstrap (unchanged) |
+| `lua/config/options.lua` | Omarchy defaults + personal overrides |
+| `lua/config/{keymaps,autocmds}.lua` | Starter placeholders for extra keymaps/autocmds |
+| `lazyvim.json` | Enabled LazyVim extras (edit with `:LazyExtras`) |
+| `lazy-lock.json` | Pinned plugin versions (commit after `:Lazy update`) |
+| `lua/plugins/theme.lua` | Rose Pine, transparent |
+| `lua/plugins/*.lua` | Omarchy overlay: no news popups, no smooth scroll, transparent lualine |
+| `plugin/after/transparency.lua` | Omarchy's transparent-background highlight overrides |
 
-| Keybinding | Command | Description |
-|------------|---------|-------------|
-| `<leader>ff` | `Telescope find_files` | Find files in current directory (respects `.gitignore`) |
-| `<leader>fb` | `Telescope buffers` | List open buffers |
-| `<leader>fs` | `Telescope live_grep` | Live grep search (uses **ripgrep** for speed) |
-| `<leader>fc` | `Telescope grep_string` | Find string under cursor |
-| `<leader>fh` | `Telescope help_tags` | List available help tags |
-| `<leader>sv` | `<C-w>v` | Split window vertically |
-| `<leader>sh` | `<C-w>s` | Split window horizontally |
-| `<leader>se` | `<C-w>=` | Make split windows equal |
-| `<leader>sx` | `:close` | Close current split window |
-| `<leader>to` | `:tabnew` | Open new tab |
-| `<leader>tx` | `:tabclose` | Close current tab |
-| `<leader>tn` | `:tabn` | Go to next tab |
-| `<leader>tp` | `:tabp` | Go to previous tab |
-| `<leader>e` | `:NvimTreeToggle` | Toggle file explorer |
+## Compared with Omarchy
 
----
+Same as Omarchy: neo-tree explorer (`<leader>e`), format on save off (`<leader>uf` toggles it),
+smooth scrolling off, LazyVim news popups off, transparent background and status line.
 
-## LSP & Code Editing (Language Servers)
+Different:
 
-| Keybinding | Command | Description |
-|------------|---------|-------------|
-| `gf` | `Lspsaga lsp_finder` | Show definition and references |
-| `gD` | `vim.lsp.buf.declaration()` | Go to declaration |
-| `gd` | `Lspsaga peek_definition` | See definition in window |
-| `gi` | `vim.lsp.buf.implementation()` | Go to implementation |
-| `K` | `Lspsaga hover_doc` | Show documentation under cursor |
-| `[d` | `Lspsaga diagnostic_jump_prev` | Jump to previous diagnostic |
-| `]d` | `Lspsaga diagnostic_jump_next` | Jump to next diagnostic |
-| `<leader>d` | `Lspsaga show_line_diagnostics` | Show line diagnostics |
-| `<leader>D` | `Lspsaga show_cursor_diagnostics` | Show cursor diagnostics |
-| `<leader>ca` | `Lspsaga code_action` | Show available code actions |
-| `<leader>rn` | `Lspsaga rename` | Smart rename |
-| `<leader>rf` | `vim.lsp.buf.rename()` | Rename symbol (TypeScript) |
-| `<leader>a` | `vim.lsp.buf.code_action` | Code action (Rust) |
-| `<leader>o` | `LSoutlineToggle` | Show outline on right |
+- **Options**: 4-space indent, relative line numbers, `-` counts as part of a word.
+- **Language extras**: python (ty + ruff), typescript, rust, clangd, terraform, docker, yaml, toml, json.
+- **Theme**: pinned to Rose Pine. Omarchy symlinks `theme.lua` to its current system theme and
+  hot-reloads it; that machinery (`all-themes.lua`, `omarchy-theme-hotreload.lua`) is left out.
+- **Clipboard**: Omarchy's Wayland/tmux `remote_clipboard.lua` is left out; LazyVim's default
+  (system clipboard, OSC 52 over SSH) is used.
 
----
-
-## Git Operations
-
-| Keybinding | Command | Description |
-|------------|---------|-------------|
-| `<leader>u` | `UndotreeToggle` | Toggle undo tree |
-| `x` | `"_x` | Delete without copying |
-| `jk` | `<ESC>` | Exit insert mode |
-
----
-
-
-
-## Useful Commands
-
-### Package Management
+## Useful commands
 
 | Command | Description |
-|---------|-------------|
-| `:PackerSync` | Update/install all plugins |
-| `:Mason` | Open Mason UI to manage LSP servers, linters, formatters |
-| `:MasonInstall <server>` | Install a specific LSP server (e.g., `:MasonInstall lua_ls`) |
-| `:MasonInstall <formatter>` | Install a formatter (e.g., `:MasonInstall stylua`) |
-| `:MasonUninstall <server>` | Uninstall a server |
+|---|---|
+| `:Lazy` | Plugin manager UI (`:Lazy sync` to install/update/clean) |
+| `:LazyExtras` | Enable/disable LazyVim extras (writes `lazyvim.json`) |
+| `:Mason` | Manage LSP servers, formatters and linters |
+| `:LazyHealth` | Health check for LazyVim and its plugins |
 
-### Window Management
-
-| Command | Description |
-|---------|-------------|
-| `:MaximizerToggle` | Toggle split window maximization |
-| `:NvimTreeToggle` | Toggle file explorer |
-| `:UndotreeToggle` | Toggle undo tree |
-
-### Navigation & Search
-
-| Command | Description |
-|---------|-------------|
-| `:nohl` | Clear search highlight |
-| `:Telescope find_files` | Find files |
-| `:Telescope live_grep` | Live grep search |
-| `:Telescope buffers` | List buffers |
-| `:Telescope help_tags` | List help tags |
-
-### LSP Commands
-
-| Command | Description |
-|---------|-------------|
-| `:lua vim.lsp.buf.declaration()` | Go to declaration |
-| `:lua vim.lsp.buf.definition()` | Go to definition |
-| `:lua vim.lsp.buf.rename()` | Rename symbol |
-| `:lua vim.lsp.buf.code_action()` | Code action |
-| `:lua vim.lsp.buf.format()` | Format buffer |
-
-### Fugitive (Git)
-
-| Command | Description |
-|---------|-------------|
-| `:G` | Show git status |
-| `:Gcommit` | Commit changes |
-| `:Gdiff` | Show git diff |
-| `:Gblame` | Show blame |
-
----
-
-## Default Keybindings
-
-| Key | Action |
-|-----|--------|
-| `x` | Delete without copying |
-| `jk` | Exit insert mode |
-| `<leader>nh` | Clear search highlight (`:nohl`) |
-| `<leader>+` | Increment number (`<C-a>`) |
-| `<leader>-` | Decrement number (`<C-x>`) |
-
----
-
-## Plugins Overview
-
-| Plugin | Purpose |
-|--------|---------|
-| **telescope.nvim** | Fuzzy finder for files, buffers, and grep |
-| **nvim-tree** | File explorer |
-| **mason.nvim** | LSP server & formatter installer |
-| **lspsaga.nvim** | Enhanced LSP UI |
-| **Comment.nvim** | Multi-line commenting |
-| **nvim-cmp** | Autocompletion |
-| **gitsigns.nvim** | Git diff visualization |
-| **undotree** | Undo tree navigation |
-| **vim-fugitive** | Git integration |
-| **vim-maximizer** | Window maximization |
-| **nvim-autopairs** | Auto-close parentheses/brackets |
-| **nvim-treesitter** | Syntax trees for better parsing |
-
----
-
-## Configuration Tips
-
-1. **Change leader key**: Modify `vim.g.mapleader` in `core/keymaps.lua`
-2. **Install LSP servers**: Use `:MasonInstall <server_name>`
-3. **Update plugins**: `:PackerSync`
-4. **Format code**: `:lua vim.lsp.buf.format()` or `<leader>ca`
-5. **Search faster**: Telescope uses ripgrep (`rg`) by default
-
----
-
-*Last updated: 2026-03-21*
+External tools LazyVim expects: `git`, `rg`, `fd`, `lazygit` (`<leader>gg`), a C compiler and
+`tree-sitter` for parsers, and `node` for some language servers.
