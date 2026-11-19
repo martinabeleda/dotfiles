@@ -68,7 +68,6 @@ fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 alias k="kubectl"
-alias f="flyctl"
 alias v="nvim"
 alias lh="ls -alh"
 alias rd="ripdiff"
@@ -103,16 +102,6 @@ command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Added by flyctl installer
-export FLYCTL_INSTALL="$HOME/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-if command -v flyctl &>/dev/null; then
-    autoload -U compinit; compinit
-    source <(flyctl completion zsh)
-    compdef _flyctl fly
-fi
-
 
 # >>> grok installer >>>
 if [[ -d "$HOME/.grok" ]]; then
