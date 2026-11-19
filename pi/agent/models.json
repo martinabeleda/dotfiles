@@ -1,13 +1,12 @@
 {
   "providers": {
-    "llama-cpp": {
+    "omarchy": {
       "baseUrl": "https://llama.tailad6f06.ts.net/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
         {
           "id": "qwen3.8-pi",
-          "name": "Qwen 3.8 (tailnet)",
           "contextWindow": 65536,
           "reasoning": false
         }

@@ -1,0 +1,18 @@
+# Linked on every machine except Omarchy, including minimal servers.
+- defaults:
+    link:
+      relink: true
+      ignore: true
+      create: true
+
+- clean: ["~", "~/.config", "~/.local/bin"]
+
+- link:
+    ~/.gitconfig: .gitconfig
+    ~/.tmux.conf: tmux/.tmux.conf
+
+- shell:
+    - [
+        'mkdir -p ~/.tmux/plugins && if [ -d ~/.tmux/plugins/tpm/.git ]; then git -C ~/.tmux/plugins/tpm pull --ff-only; else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi',
+        Installing or updating tmux plugin manager,
+      ]

@@ -2,6 +2,3 @@ nvim/plugin/packer_compiled.lua
 **.swp
 .DS_Store
 
-# only the ssh config is tracked, never keys
-ssh/*
-!ssh/config

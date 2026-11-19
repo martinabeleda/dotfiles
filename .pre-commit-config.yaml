@@ -12,10 +12,17 @@ repos:
         name: bash -n
         entry: bash -n
         language: system
-        files: ^(install|scripts/.*\.sh|bin/.*)$
+        files: ^(install|scripts/.*\.sh)$
       - id: dotfiles-install-dry-run
-        name: dotfiles install dry run
-        entry: ./install --dry-run
+        name: dotfiles install dry run (all profiles)
+        entry: bash -c 'for p in pi minimal full; do ./install --dry-run --profile "$p" >/dev/null || exit 1; done'
         language: system
         pass_filenames: false
         always_run: true
+      # This repo is public: host details belong in the private homelab repo.
+      # pi/agent/models.json is a deliberate exception (tailnet model endpoint).
+      - id: no-tailnet-details
+        name: no tailnet hostnames or addresses
+        language: pygrep
+        entry: '\.ts\.net\b|\b100\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\.[0-9]{1,3}\.[0-9]{1,3}\b'
+        exclude: ^(pi/agent/models\.json|dotbot/.*)$

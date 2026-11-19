@@ -7,31 +7,89 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Source OS detection
 source "$BASEDIR/scripts/detect-os.sh"
 
+usage() {
+    cat <<'EOF'
+Usage: ./install [--profile PROFILE] [--packages] [--dry-run] [--no-backup] [dotbot args...]
+
+Profiles (default: pi if Omarchy is detected, otherwise full):
+  pi        pi agent config only (Omarchy: everything else stays on Omarchy's defaults)
+  minimal   pi + git and tmux (e.g. a NAS)
+  full      minimal + zsh/Oh My Zsh, nvim, starship, ghostty
+EOF
+}
+
 # Parse arguments - separate our flags from dotbot flags
 install_pkgs=false
 backup_existing=true
 dry_run=false
+profile=""
 dotbot_args=()
-for arg in "$@"; do
-    if [[ "$arg" == "--packages" || "$arg" == "-p" ]]; then
-        install_pkgs=true
-    elif [[ "$arg" == "--dry-run" ]]; then
-        dry_run=true
-    elif [[ "$arg" == "--no-backup" ]]; then
-        backup_existing=false
-    else
-        dotbot_args+=("$arg")
-    fi
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --packages|-p) install_pkgs=true ;;
+        --dry-run) dry_run=true ;;
+        --no-backup) backup_existing=false ;;
+        --profile) profile="${2:-}"; shift ;;
+        --profile=*) profile="${1#--profile=}" ;;
+        -h|--help) usage; exit 0 ;;
+        *) dotbot_args+=("$1") ;;
+    esac
+    shift
 done
+
+if [[ -z "$profile" ]]; then
+    # Omarchy ships its own shell, editor, prompt, terminal, git, tmux and
+    # Hyprland config (~/.config/git/config, ~/.config/tmux/tmux.conf, ...).
+    if [[ -d "${HOME}/.local/share/omarchy" ]]; then
+        profile="pi"
+    else
+        profile="full"
+    fi
+fi
+
+case "$profile" in
+    pi)      layers=(pi) ;;
+    minimal) layers=(base pi) ;;
+    full)    layers=(base pi dev) ;;
+    *) echo "Unknown profile: $profile" >&2; usage >&2; exit 1 ;;
+esac
 
 echo "=========================================="
 echo "Dotfiles Installation"
 echo "=========================================="
 echo "Detected OS: $DOTFILES_OS"
 echo "Hostname: $DOTFILES_HOSTNAME"
+echo "Profile: $profile (${layers[*]})"
 echo "Dry run: $dry_run"
 echo "Backup existing files: $backup_existing"
 echo "=========================================="
+
+DOTBOT_DIR="dotbot"
+DOTBOT_BIN="bin/dotbot"
+
+cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
+
+# Read "<target>\t<source>" pairs from the link directives of the selected
+# layers, using the PyYAML that ships inside the dotbot submodule.
+managed_targets=()
+managed_sources=()
+while IFS=$'\t' read -r target source; do
+    managed_targets+=("${target/#\~/$HOME}")
+    managed_sources+=("$source")
+done < <(
+    PYTHONPATH="${BASEDIR}/${DOTBOT_DIR}/lib/pyyaml/lib" python3 - "${layers[@]/#/conf/}" <<'PY'
+import sys, yaml
+for layer in sys.argv[1:]:
+    with open(layer + ".yaml") as f:
+        for directive in yaml.safe_load(f) or []:
+            for target, source in (directive.get("link") or {}).items():
+                if isinstance(source, dict):
+                    source = source.get("path")
+                print(f"{target}\t{source}")
+PY
+)
 
 backup_root="${HOME}/.dotfiles-backups"
 backup_stamp="$(date +%Y%m%d-%H%M%S)"
@@ -76,107 +134,46 @@ classify_target() {
     echo "conflict"
 }
 
-move_conflicting_target() {
-    local target="$1"
-    local source_rel="$2"
-    local status
-
-    status="$(classify_target "$target" "$source_rel")"
-    if [[ "$status" != "conflict" ]]; then
-        return
-    fi
-
-    ensure_backup_dir
-    local backup_target="${backup_dir}/${target#"$HOME"/}"
-    mkdir -p "$(dirname "$backup_target")"
-    mv "$target" "$backup_target"
-    echo "Moved existing target to backup: $target -> $backup_target"
-}
-
-# Run dotbot for symlinks
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-DOTBOT_BIN="bin/dotbot"
-managed_targets=(
-    "${HOME}/.config/nvim"
-    "${HOME}/.config/ghostty/config"
-    "${HOME}/.config/hypr"
-    "${HOME}/.zshrc"
-    "${HOME}/.zprofile"
-    "${HOME}/.gitconfig"
-    "${HOME}/.config/starship.toml"
-    "${HOME}/.tmux.conf"
-)
-managed_sources=(
-    "nvim"
-    "ghostty/config"
-    "hypr"
-    "zsh/.zshrc"
-    "zsh/.zprofile"
-    ".gitconfig"
-    "starship.toml"
-    "tmux/.tmux.conf"
-)
-
-if [[ "$backup_existing" == true ]]; then
-    if [[ "$dry_run" == true ]]; then
-        echo "Dry run summary:"
-        for i in "${!managed_targets[@]}"; do
-            target="${managed_targets[$i]}"
-            source="${managed_sources[$i]}"
-            status="$(classify_target "$target" "$source")"
-            case "$status" in
-                missing)
-                    echo "  create link: $target -> ${BASEDIR}/${source}"
-                    ;;
-                managed)
-                    echo "  keep link:   $target"
-                    ;;
-                conflict)
-                    echo "  backup and relink: $target -> ${backup_dir}/${target#"$HOME"/}"
-                    ;;
-            esac
-        done
-        echo "  shell actions: install/update Oh My Zsh, zsh plugins, and tmux TPM if needed"
-        if [[ "$install_pkgs" == true ]]; then
-            echo "  package actions: would run optional package installation"
-        fi
-        exit 0
-    fi
-
-    for i in "${!managed_targets[@]}"; do
-        move_conflicting_target "${managed_targets[$i]}" "${managed_sources[$i]}"
-    done
-elif [[ "$dry_run" == true ]]; then
+if [[ "$dry_run" == true ]]; then
     echo "Dry run summary:"
     for i in "${!managed_targets[@]}"; do
         target="${managed_targets[$i]}"
         source="${managed_sources[$i]}"
-        status="$(classify_target "$target" "$source")"
-        case "$status" in
-            missing)
-                echo "  create link: $target -> ${BASEDIR}/${source}"
-                ;;
-            managed)
-                echo "  keep link:   $target"
-                ;;
+        case "$(classify_target "$target" "$source")" in
+            missing)  echo "  create link: $target -> ${BASEDIR}/${source}" ;;
+            managed)  echo "  keep link:   $target" ;;
             conflict)
-                echo "  conflict would remain without backups: $target"
+                if [[ "$backup_existing" == true ]]; then
+                    echo "  backup and relink: $target -> ${backup_dir}/${target#"$HOME"/}"
+                else
+                    echo "  conflict would remain without backups: $target"
+                fi
                 ;;
         esac
     done
-    echo "  shell actions: install/update Oh My Zsh, zsh plugins, and tmux TPM if needed"
+    echo "  shell actions: run shell steps from ${layers[*]/#/conf/}"
     if [[ "$install_pkgs" == true ]]; then
         echo "  package actions: would run optional package installation"
     fi
     exit 0
 fi
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
+if [[ "$backup_existing" == true ]]; then
+    for i in "${!managed_targets[@]}"; do
+        target="${managed_targets[$i]}"
+        if [[ "$(classify_target "$target" "${managed_sources[$i]}")" == "conflict" ]]; then
+            ensure_backup_dir
+            backup_target="${backup_dir}/${target#"$HOME"/}"
+            mkdir -p "$(dirname "$backup_target")"
+            mv "$target" "$backup_target"
+            echo "Moved existing target to backup: $target -> $backup_target"
+        fi
+    done
+fi
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${dotbot_args[@]}"
+for layer in "${layers[@]}"; do
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "conf/${layer}.yaml" "${dotbot_args[@]}"
+done
 
 # Optional: Install packages with --packages or -p flag
 if [[ "$install_pkgs" == true ]]; then

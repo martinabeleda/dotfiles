@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: "0 8 * * 6"
 
@@ -13,9 +14,14 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            name: macOS
+            name: macOS (full)
+            profile: full
           - os: ubuntu-latest
-            name: Ubuntu
+            name: Ubuntu (full)
+            profile: full
+          - os: ubuntu-latest
+            name: Ubuntu (minimal)
+            profile: minimal
             
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }}
@@ -36,7 +42,7 @@ jobs:
         run: |
           export RUNZSH=no
           export CHSH=no
-          HOME=~/dotfiles-test ./install
+          HOME=~/dotfiles-test ./install --profile ${{ matrix.profile }}
           
       - name: Verify shell config loads
         run: |
@@ -51,9 +57,11 @@ jobs:
       matrix:
         include:
           - container: debian:bookworm
-            name: Debian
+            name: Debian (full)
+            profile: full
           - container: archlinux:latest
-            name: Arch Linux
+            name: Arch Linux (full)
+            profile: full
             
     runs-on: ubuntu-latest
     name: ${{ matrix.name }}
@@ -86,7 +94,7 @@ jobs:
           export CHSH=no
           # Set safe.directory at system level so it persists after dotbot replaces gitconfig
           git config --system --add safe.directory "$GITHUB_WORKSPACE"
-          HOME=~/dotfiles-test ./install
+          HOME=~/dotfiles-test ./install --profile ${{ matrix.profile }}
 
       - name: Verify shell config loads
         run: |
